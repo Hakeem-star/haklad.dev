@@ -6,8 +6,7 @@ const EyeWrapper = styled.div<{ placement: { x: number; y: number } }>`
   position: absolute;
   inset: 0;
   transform: ${({ placement: { x, y } }) =>
-    `translate(calc(${x}px + 50vw}px, ${y} + 50vh
-    }px)`};
+    `translate(calc(${x}px + 50vw), calc(${y}px + 50vh))`};
   width: fit-content;
   height: fit-content;
 `;
@@ -24,7 +23,7 @@ const EyeBall = styled.div`
   width: 20px;
   height: 20px;
 `;
-
+// translate(calc(-117.55705045849467 px + 100vw),calc(161.80339887498945 px + 100vh))
 const EyeWhite = styled.div`
   width: 100px;
   height: 100px;
