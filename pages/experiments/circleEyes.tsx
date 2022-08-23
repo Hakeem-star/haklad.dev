@@ -6,8 +6,7 @@ const EyeWrapper = styled.div<{ placement: { x: number; y: number } }>`
   position: absolute;
   inset: 0;
   transform: ${({ placement: { x, y } }) =>
-    `translate(${x + window.innerWidth / 2}px, ${
-      y + window.innerHeight / 2
+    `translate(calc(${x}px + 50vw}px, ${y} + 50vh
     }px)`};
   width: fit-content;
   height: fit-content;
@@ -84,7 +83,7 @@ const CircleEyes = () => {
     <Wrapper>
       {Array(sides)
         .fill(Array(sides).keys())
-        .map((v, idx) => {
+        .map((_, idx) => {
           let x = radius * Math.sin(degrees_to_radians(sliceAngle * idx));
           let y = radius * Math.cos(degrees_to_radians(sliceAngle * idx));
           return (
