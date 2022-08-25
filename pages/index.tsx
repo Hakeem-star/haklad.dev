@@ -126,9 +126,7 @@ const Home: NextPage = () => {
           <StyledUL>
             <li>
               <Link href="/about" passHref>
-                <StyledLink onMouseEnter={handleLinkHover} target="_blank">
-                  About me
-                </StyledLink>
+                <StyledLink onMouseEnter={handleLinkHover}>About me</StyledLink>
               </Link>
             </li>
             <li>
@@ -144,14 +142,14 @@ const Home: NextPage = () => {
             </li>
             <li>
               <Link style={{ color: "white" }} href="/experiments" passHref>
-                <StyledLink onMouseEnter={handleLinkHover} target="_blank">
+                <StyledLink onMouseEnter={handleLinkHover}>
                   Experiments
                 </StyledLink>
               </Link>
             </li>
             <li>
               <Link style={{ color: "white" }} href="/contact" passHref>
-                <StyledLink onMouseEnter={handleLinkHover} target="_blank">
+                <StyledLink onMouseEnter={handleLinkHover}>
                   Get in touch
                 </StyledLink>
               </Link>
