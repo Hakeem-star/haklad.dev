@@ -7,9 +7,17 @@ import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import VolumeMute from "./assets/VolumeMute.svg";
 import VolumeUnMute from "./assets/VolumeUnMute.svg";
+import StartMenu from "../components/StartMenu";
+
+const StartButton = styled.h2`
+  cursor: pointer;
+`;
 
 const VolumeContainer = styled.div`
   cursor: pointer;
+  position: absolute;
+  bottom: 25px;
+  right: 25px;
 `;
 
 const StyledLink = styled.a`
@@ -70,14 +78,15 @@ const H1 = styled.h1`
 
 const Home: NextPage = () => {
   const audioRef = useRef<null | HTMLAudioElement>(null);
-  const [muted, setMuted] = useState(true);
+  const [muted, setMuted] = useState(false);
+  const [started, setStarted] = useState(false);
 
   useEffect(() => {
     audioRef.current = new Audio("./Cursor-Move.wav");
     audioRef.current.preload = "auto";
     audioRef.current.volume = 0.2;
     // TODO: check if the audio was muted instead of making an assumption
-    audioRef.current.muted = true;
+    // audioRef.current.muted = true;
   }, []);
 
   const handleLinkHover = useCallback(() => {
@@ -98,12 +107,6 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        {/* <audio
-          autoPlay={false}
-          ref={audioRef}
-          src="./final-fantasy-viii-sound-effects-cursor-move.mp3"
-          preload="auto"
-        /> */}
         <VolumeContainer
           onClick={() => {
             setMuted((v) => {
@@ -122,40 +125,17 @@ const Home: NextPage = () => {
           <H1 className={styles.title}>Hakeem Ladejobi</H1>
           <GradientOverlay />
         </div>
-        <nav>
-          <StyledUL>
-            <li>
-              <Link href="/about" passHref>
-                <StyledLink onMouseEnter={handleLinkHover}>About me</StyledLink>
-              </Link>
-            </li>
-            <li>
-              <Link
-                style={{ color: "white" }}
-                href="https://hakeems-anime-site.herokuapp.com/"
-                passHref
-              >
-                <StyledLink onMouseEnter={handleLinkHover} target="_blank">
-                  Anime Site
-                </StyledLink>
-              </Link>
-            </li>
-            <li>
-              <Link style={{ color: "white" }} href="/experiments" passHref>
-                <StyledLink onMouseEnter={handleLinkHover}>
-                  Experiments
-                </StyledLink>
-              </Link>
-            </li>
-            <li>
-              <Link style={{ color: "white" }} href="/contact" passHref>
-                <StyledLink onMouseEnter={handleLinkHover}>
-                  Get in touch
-                </StyledLink>
-              </Link>
-            </li>
-          </StyledUL>
-        </nav>
+        {!started ? (
+          <StartButton
+            onClick={() => {
+              setStarted(true);
+            }}
+          >
+            START
+          </StartButton>
+        ) : (
+          <StartMenu handleLinkHover={handleLinkHover} />
+        )}
       </main>
 
       {/* <footer className={styles.footer}>
