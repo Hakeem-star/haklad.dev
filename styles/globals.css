@@ -1,6 +1,6 @@
 html,
 body {
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  font-family:-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
@@ -55,4 +55,13 @@ p, h1, h2, h3, h4, h5, h6 {
     color: white;
     background: black;
   }
+}
+
+@font-face {
+  font-family: Mason-Regular;
+  src: url('../public/fonts/Mason-Regular.ttf');
+}
+@font-face {
+  font-family: PT Sans Regular;
+  src: url('../public/fonts/PT Sans Regular.ttf');
 }

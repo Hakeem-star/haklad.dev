@@ -1,6 +1,7 @@
 import React from "react";
 import { ColumnWrapper } from "./shared";
 import styled from "styled-components";
+import { colors } from "../../constants";
 
 const OutboundWrapper = styled.div`
   display: flex;
@@ -9,6 +10,7 @@ const OutboundWrapper = styled.div`
   justify-content: center;
   text-align: center;
   padding-bottom: 30px;
+  color: ${colors.witcher_text_gold};
 `;
 
 const OutboundItem = styled.div`
@@ -23,8 +25,8 @@ const OutboundItem = styled.div`
 `;
 
 const Outbound = styled.div`
-  border-top: 1px solid red;
-  border-bottom: 1px solid red;
+  border-top: 1px solid ${colors.witcher_dull_gold};
+  border-bottom: 1px solid ${colors.witcher_dull_gold};
 
   display: flex;
   gap: 20px;
@@ -42,10 +44,9 @@ const Wrapper = styled.div`
 `;
 
 const ImageArea = styled.div`
-  height: 70%;
   width: 99%;
+  min-height: 70%;
   background: white;
-  margin: auto;
   padding: 10px;
 `;
 

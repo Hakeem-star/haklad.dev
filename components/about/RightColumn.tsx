@@ -25,7 +25,7 @@ export const RightColumn = (props: Props) => {
   return (
     <ColumnWrapper>
       <Wrapper>
-        <p style={{ marginBottom: 20 }}>RightColumn</p>
+        <p style={{ marginBottom: 20 }}>Experience</p>
         <Divider />
         <Info>
           <p>

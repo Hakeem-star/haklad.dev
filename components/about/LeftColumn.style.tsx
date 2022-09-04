@@ -1,39 +1,55 @@
 import styled from "styled-components";
+import { colors } from "../../constants";
 
 export const ColumnHeader = styled.p`
   margin-bottom: 30px;
+  font-size: 18px;
 `;
 
 export const ItemsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 15px;
   margin-top: 10px;
 `;
 
 export const Details = styled.details`
   min-height: 30px;
-  vertical-align: center;
   margin-bottom: 20px;
 `;
 
 export const DetailsItem = styled.div`
   height: 60px;
-  width: 100%;
+  width: calc(100% - 5px);
+  margin-left: auto;
 
   display: flex;
   align-items: center;
 
-  border-bottom: 1px solid blue;
+  border-top: 1px solid ${colors.witcher_dull_gold};
+  border-bottom: 1px solid ${colors.witcher_dull_gold};
+
+  :hover {
+    color: ${colors.witcher_text_brighter_gold};
+  }
 `;
 
 export const Summary = styled.summary`
   position: relative;
+  font-size: 22px;
+  font-weight: bold;
+  color: ${colors.witcher_text_faded};
 
   cursor: pointer;
 
+  :hover {
+    color: ${colors.witcher_text_gold};
+  }
+
   :before {
-    content: "►";
+    content: "▼";
+    font-size: 14px;
+
     position: absolute;
     right: 20px;
 
@@ -42,7 +58,7 @@ export const Summary = styled.summary`
 
   details[open] > & {
     :before {
-      content: "▼";
+      content: "▲";
       position: absolute;
       right: 20px;
     }

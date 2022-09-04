@@ -5,14 +5,30 @@ import MiddleColumn from "../components/about/MiddleColumn";
 import { LeftColumn } from "../components/about/LeftColumn";
 import { RightColumn } from "../components/about/RightColumn";
 
-// design to look like witcher beastiary page
-// https://www.mobygames.com/images/shots/l/822886-the-witcher-3-wild-hunt-playstation-4-screenshot-bestiary.jpg
+const Name = styled.h2`
+  margin-top: 70px;
+  margin-bottom: 60px;
+  transform: translateX(50%);
+  width: fit-content;
+`;
+
 const Wrapper = styled.div`
+  font-family: PT Sans Regular;
+  padding: 0 5em;
+
   width: 100vw;
   height: 100vh;
-  padding: 0 5em;
-  padding-top: 10em;
 
+  display: flex;
+  flex-direction: column;
+`;
+
+// design to look like witcher beastiary page
+// https://www.mobygames.com/images/shots/l/822886-the-witcher-3-wild-hunt-playstation-4-screenshot-bestiary.jpg
+const Columns = styled.div`
+  width: 100%;
+  height: 100%;
+  max-height: 80%;
   display: grid;
   grid-template-columns: repeat(3, 3fr);
 `;
@@ -22,9 +38,12 @@ type Props = {};
 const About = ({}: Props) => {
   return (
     <Wrapper>
-      <LeftColumn />
-      <MiddleColumn />
-      <RightColumn />
+      <Name>Hakeem Ladejobi</Name>
+      <Columns>
+        <LeftColumn />
+        <MiddleColumn />
+        <RightColumn />
+      </Columns>
     </Wrapper>
   );
 };
