@@ -36,9 +36,11 @@ export const DetailsItem = styled.div`
 
 export const Summary = styled.summary`
   position: relative;
-  font-size: 22px;
-  font-weight: bold;
+  font-size: 20px;
   color: ${colors.witcher_text_faded};
+
+  border: 1px solid ${colors.bestiary_section_border_inactive};
+  padding: 2px;
 
   cursor: pointer;
 
@@ -53,7 +55,8 @@ export const Summary = styled.summary`
     position: absolute;
     right: 20px;
 
-    height: 140px;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   details[open] > & {
