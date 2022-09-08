@@ -1,5 +1,5 @@
 import React from "react";
-import { skillData } from "./constants";
+import { borderSVG, skillData } from "./constants";
 import {
   ColumnHeader,
   Details,
@@ -15,7 +15,7 @@ const SummaryContent = styled.div`
   border: 6px solid pink;
   border-image: ${() =>
     // encoded svg - https://yoksel.github.io/url-encoder/
-    `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-1 -1 32 32'%3E%3Cpath d='M 0 10 l 10 0 L 10 0 l 10 0 l 0 10 l 10 0 L 30 20 L 20 20 L 20 30 L 10 30 L 10 20 L 0 20 Z' stroke='${colors.bestiary_section_border_inactive}' stroke-width='1' fill='none'/%3E%3C/svg%3E")`};
+    `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-1 -1 32 32'%3E%3Cpath d='M 0 10 l 10 0 L 10 0 l 10 0 l 0 10 l 10 0 L 30 20 L 20 20 L 20 30 L 10 30 L 10 20 L 0 20 Z' stroke='${colors.bestiary_section_border_inactive}' stroke-width='3' fill='none'/%3E%3C/svg%3E")`};
   border-image-slice: 40%;
   padding: 0 20px;
 `;
@@ -45,9 +45,7 @@ const Wrapper = styled.div`
     position: absolute;
 
     border: 6px solid pink;
-    border-image: ${() =>
-      // encoded svg - https://yoksel.github.io/url-encoder/
-      `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-1 -1 32 32'%3E%3Cdefs%3E%3ClinearGradient id='lgrad' x1='0%25' y1='60%25' x2='0%25' y2='-50%25'%3E%3Cstop offset='0%25' style='stop-color:black;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:${colors.bestiary_section_border_inactive};stop-opacity:0' /%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath id='myText' d='M 0 10 l 10 0 L 10 0 l 10 0 l 0 10 l 10 0 L 30 20 L 20 20 L 20 30 L 10 30 L 10 20 L 0 20 Z' stroke='url(%23lgrad)' stroke-width='1' fill='none'/%3E%3C/svg%3E")`};
+    border-image: url("data:image/svg+xml,${borderSVG}");
     border-image-slice: 40%;
   }
 
@@ -96,16 +94,16 @@ export const LeftColumn = (props: Props) => {
       <Wrapper>
         <ColumnHeader>Skills</ColumnHeader>
         <DetailsWrapper>
-          {skillData.map((data) => {
+          {skillData.map((data, idx) => {
             return (
-              <Details>
+              <Details key={idx}>
                 {/* TODO - Add stars to these that go away once expanded, to simulate, new item */}
                 <Summary>
                   <SummaryContent>{data.title}</SummaryContent>
                 </Summary>
                 <ItemsWrapper>
                   {data.items.map((item) => (
-                    <DetailsItem>{item.text} </DetailsItem>
+                    <DetailsItem key={idx}>{item.text} </DetailsItem>
                   ))}
                 </ItemsWrapper>
               </Details>
