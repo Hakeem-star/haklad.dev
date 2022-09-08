@@ -1,55 +1,21 @@
 import React from "react";
-import { borderSVG, skillData } from "./constants";
+import { skillData } from "./constants";
 import {
   ColumnHeader,
   Details,
   DetailsItem,
+  DetailsItemWrapper,
+  FadedBackground,
   ItemsWrapper,
   Summary,
+  SummaryContent,
+  Wrapper,
 } from "./LeftColumn.style";
 import { ColumnWrapper } from "./shared";
 import styled from "styled-components";
 import { colors } from "../../constants";
 
-const SummaryContent = styled.div`
-  border: 6px solid pink;
-  border-image: ${() =>
-    // encoded svg - https://yoksel.github.io/url-encoder/
-    `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-1 -1 32 32'%3E%3Cpath d='M 0 10 l 10 0 L 10 0 l 10 0 l 0 10 l 10 0 L 30 20 L 20 20 L 20 30 L 10 30 L 10 20 L 0 20 Z' stroke='${colors.bestiary_section_border_inactive}' stroke-width='3' fill='none'/%3E%3C/svg%3E")`};
-  border-image-slice: 40%;
-  padding: 0 20px;
-`;
-
-const Wrapper = styled.div`
-  height: 70%;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-
-  padding: 5px;
-  border: 1px solid ${colors.bestiary_section_border_inactive};
-  box-shadow: 0 30px 40px rgba(0, 0, 0, 0.1);
-
-  -webkit-mask-box-image: linear-gradient(white, black);
-
-  /* mask-border-source: linear-gradient(white, black); */
-  mask-type: luminance;
-  position: relative;
-
-  :before {
-    content: "";
-    width: calc(100% - 2px);
-    height: calc(100% - 2px);
-    top: 1px;
-    left: 1px;
-    position: absolute;
-
-    border: 6px solid pink;
-    border-image: url("data:image/svg+xml,${borderSVG}");
-    border-image-slice: 40%;
-  }
-
-  /* clip-path: polygon(
+/* clip-path: polygon(
     50% 0%,
     98.75% 0%,
     98.75% 1.25%,
@@ -79,10 +45,9 @@ const Wrapper = styled.div`
     98.5% 0.25%,
     50% 0.25%
   ); */
-`;
 
 const DetailsWrapper = styled.div`
-  overflow: overlay;
+  overflow: auto;
   height: 100%;
 `;
 
@@ -102,8 +67,14 @@ export const LeftColumn = (props: Props) => {
                   <SummaryContent>{data.title}</SummaryContent>
                 </Summary>
                 <ItemsWrapper>
-                  {data.items.map((item) => (
-                    <DetailsItem key={idx}>{item.text} </DetailsItem>
+                  {data.items.map((item, idx) => (
+                    <DetailsItemWrapper key={idx}>
+                      <DetailsItem>
+                        <FadedBackground>
+                          <p>{item.text}</p>
+                        </FadedBackground>
+                      </DetailsItem>
+                    </DetailsItemWrapper>
                   ))}
                 </ItemsWrapper>
               </Details>

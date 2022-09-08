@@ -27,10 +27,11 @@ const Wrapper = styled.div`
 // https://www.mobygames.com/images/shots/l/822886-the-witcher-3-wild-hunt-playstation-4-screenshot-bestiary.jpg
 const Columns = styled.div`
   width: 100%;
-  height: 100%;
+  flex-grow: 1;
   max-height: 80%;
   display: grid;
   grid-template-columns: repeat(3, 3fr);
+  grid-template-rows: 100%;
 `;
 
 type Props = {};
