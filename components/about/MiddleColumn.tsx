@@ -25,9 +25,6 @@ const OutboundItem = styled.div`
 `;
 
 const Outbound = styled.div`
-  border-top: 1px solid ${colors.witcher_dull_gold};
-  border-bottom: 1px solid ${colors.witcher_dull_gold};
-
   display: flex;
   gap: 20px;
   justify-content: center;
@@ -56,13 +53,19 @@ const MiddleColumn = (props: Props) => {
   return (
     <ColumnWrapper>
       <Wrapper>
+        {/* Add three js canvas that allows you to change lighting on a still image
+        using the normal maps
+        Find product that does this */}
+        {/* TODO - Display a traffic cone or similar whilst building this */}
+
         <ImageArea></ImageArea>
         <OutboundWrapper>
           <p style={{ fontSize: 18 }}>TEXT</p>
           <Outbound>
-            <OutboundItem></OutboundItem>
-            <OutboundItem></OutboundItem>
-            <OutboundItem></OutboundItem>
+            {/* TODO - Images need to go above borders */}
+            <OutboundItem>Projects</OutboundItem>
+            <OutboundItem>Github</OutboundItem>
+            <OutboundItem>Linkedin</OutboundItem>
           </Outbound>
           <p style={{ fontSize: 18 }}>TEXT</p>
           <p>TEXT</p>

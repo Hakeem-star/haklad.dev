@@ -1,19 +1,19 @@
 import React from "react";
 import { skillData } from "./constants";
 import {
-  ColumnHeader,
   Details,
+  DetailsWrapper,
   DetailsItem,
   DetailsItemWrapper,
   FadedBackground,
   ItemsWrapper,
   Summary,
   SummaryContent,
-  Wrapper,
 } from "./LeftColumn.style";
 import { ColumnWrapper } from "./shared";
 import styled from "styled-components";
 import { colors } from "../../constants";
+import { ColumnHeader, FancyBorderWrapper } from "./shared/ui";
 
 /* clip-path: polygon(
     50% 0%,
@@ -46,21 +46,17 @@ import { colors } from "../../constants";
     50% 0.25%
   ); */
 
-const DetailsWrapper = styled.div`
-  overflow: auto;
-  height: 100%;
-`;
-
 type Props = {};
 
 export const LeftColumn = (props: Props) => {
   return (
     <ColumnWrapper>
-      <Wrapper>
+      <FancyBorderWrapper>
         <ColumnHeader>Skills</ColumnHeader>
         <DetailsWrapper>
           {skillData.map((data, idx) => {
             return (
+              // TODO - Only open one dropdown at once
               <Details key={idx}>
                 {/* TODO - Add stars to these that go away once expanded, to simulate, new item */}
                 <Summary>
@@ -81,7 +77,7 @@ export const LeftColumn = (props: Props) => {
             );
           })}
         </DetailsWrapper>
-      </Wrapper>
+      </FancyBorderWrapper>
     </ColumnWrapper>
   );
 };

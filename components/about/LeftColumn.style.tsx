@@ -57,51 +57,6 @@ export const SummaryContent = styled.p`
   padding: 0 20px;
 `;
 
-export const Wrapper = styled.div`
-  height: 70%;
-
-  display: flex;
-  flex-direction: column;
-
-  padding: 5px;
-
-  border: 2px solid pink;
-  border-image: ${() =>
-    `url("data:image/svg+xml,${fadedBasicBorderSvg(
-      colors.bestiary_section_area_border_active
-    )}")`};
-
-  border-image-slice: 30%;
-
-  box-shadow: 0 30px 40px rgba(0, 0, 0, 0.1);
-
-  position: relative;
-
-  :before {
-    content: "";
-    width: calc(100% - 2px);
-    height: calc(100% - 2px);
-    top: 1px;
-    left: 1px;
-    position: absolute;
-
-    border: 5px solid pink;
-    border-image: ${() =>
-      `url("data:image/svg+xml,${fadedSquareCornerBorderSVG(
-        colors.bestiary_section_area_border_active
-      )}")`};
-    border-image-slice: 40%;
-
-    // fix to allow scrolling
-    z-index: -1;
-  }
-`;
-
-export const ColumnHeader = styled.p`
-  padding: 10px;
-  font-size: 18px;
-`;
-
 export const ItemsWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -111,6 +66,16 @@ export const ItemsWrapper = styled.div`
 export const Details = styled.details`
   min-height: 30px;
   margin-bottom: -1px;
+
+  // style the summary when the det
+  &[open]:focus-within summary {
+    color: ${colors.bestiary_summary_active_text};
+  }
+`;
+
+export const DetailsWrapper = styled.div`
+  overflow: auto;
+  height: 100%;
 `;
 
 export const DetailsItemWrapper = styled.div`
@@ -119,6 +84,9 @@ export const DetailsItemWrapper = styled.div`
 
   :hover {
     border: 1px solid ${colors.bestiary_details_border_active};
+  }
+  :last-child {
+    margin-bottom: 5px;
   }
 `;
 export const DetailsItem = styled.div`
@@ -169,7 +137,10 @@ export const FadedBackground = styled.div`
 `;
 
 export const Summary = styled.summary`
-  position: relative;
+  height: 100%;
+  position: sticky;
+  top: 0;
+
   font-size: 20px;
   color: ${colors.witcher_text_faded};
   background: ${colors.bestiary_summary_background};

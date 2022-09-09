@@ -1,11 +1,21 @@
 import React from "react";
 import { ColumnWrapper } from "./shared";
 import styled from "styled-components";
+import { ColumnHeader, FancyBorderWrapper } from "./shared/ui";
+import { colors } from "../../constants";
 
 const Info = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+  overflow: auto;
+  padding-right: 5px;
+
+  color: ${colors.bestiary_details_border_active};
+
+  > p {
+    filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.3));
+  }
 `;
 
 const Divider = styled.span`
@@ -17,6 +27,7 @@ const Divider = styled.span`
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  height: 70%;
 `;
 
 type Props = {};
@@ -24,22 +35,41 @@ type Props = {};
 export const RightColumn = (props: Props) => {
   return (
     <ColumnWrapper>
-      <Wrapper>
-        <p style={{ marginBottom: 20 }}>Experience</p>
-        <Divider />
+      <FancyBorderWrapper>
+        <ColumnHeader style={{ marginBottom: 10 }}>Experience</ColumnHeader>
         <Info>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum nihil
-            nulla!
+            Experienced in many aspects of the web and always trying to learn
+            and improve. Worked several technical roles in the digital
+            advertising sector over a period of 5 years. Self-taught JavaScript
+            developer with a combination of skills that allow the development of
+            creative solutions for clients and internal teams.
           </p>
           <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis
-            distinctio eius officia, esse ipsum optio accusamus qui voluptatum
-            veniam accusantium adipisci neque hic rerum, laborum nostrum error
-            natus vel libero?
+            NeverBland / FullStack JavaScript Developer London – January 2021 –
+            Now Building data-rich web apps using React, Typescript, Prisma
+            &amp; GraphQL. Collaborating with the Client, Designers, Product
+            Managers, and other Engineers to deliver compelling user-facing
+            products.
+          </p>
+          <p>
+            MediaCom / Senior Technology Engineer London – March 2018 – Dec 2020
+            Troubleshooting and improving processes where possible. Using
+            JavaScript, I created a chrome extension we used to add
+            functionalities to DoubleClick Campaign Manager as well as using the
+            Google API to create other tools and automate tasks
+          </p>
+          <p>
+            Viant / Tech Producer November 2015 - February 2018 Gained a
+            promotion from a Junior ad trafficker to becoming an important part
+            of the company as a Tech producer in just over the space of a year
+            through hard work and a willingness to learn. Assist internal teams
+            with Ad ops, programmatic and business intel related issues. Provide
+            QA support for operations Using Google Big Query (SQL) and Tableau
+            to mine data as well as bridge gaps between data systems
           </p>
         </Info>
-      </Wrapper>
+      </FancyBorderWrapper>
     </ColumnWrapper>
   );
 };

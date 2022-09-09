@@ -13,6 +13,7 @@ export const colors = {
   bestiary_details_border_active: "rgba(172, 172, 170, 1)",
   bestiary_summary_background: "rgba(14, 13, 11, 1)",
   bestiary_summary_arrow: "rgba(77, 58, 44, 1)",
+  bestiary_summary_active_text: "rgba(237, 230, 204, 1)",
 
   bestiary_details_text: "rgba(157, 156, 152, 1)",
   bestiary_details_text_background: "rgba(16, 13, 8, 1)",

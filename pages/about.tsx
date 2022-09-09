@@ -5,10 +5,17 @@ import MiddleColumn from "../components/about/MiddleColumn";
 import { LeftColumn } from "../components/about/LeftColumn";
 import { RightColumn } from "../components/about/RightColumn";
 
-const Name = styled.h2`
+const Header = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
   margin-top: 70px;
   margin-bottom: 60px;
-  transform: translateX(50%);
+  padding: 0 5%;
+`;
+
+const Name = styled.h2`
+  /* transform: translateX(50%); */
   width: fit-content;
 `;
 
@@ -39,7 +46,12 @@ type Props = {};
 const About = ({}: Props) => {
   return (
     <Wrapper>
-      <Name>Hakeem Ladejobi</Name>
+      <Header>
+        <Name>Hakeem Ladejobi</Name>
+        {/* Include nav to go back home or maybe navigate to experiments page */}
+        {/* TODO make this value dynamic based on year */}
+        <Name>Level 32</Name>
+      </Header>
       <Columns>
         <LeftColumn />
         <MiddleColumn />
