@@ -22,8 +22,6 @@ export const FancyBorderWrapper = styled.div`
 
   border-image-slice: 30%;
 
-  /* box-shadow: 0 30px 40px rgba(0, 0, 0, 0.1); */
-
   position: relative;
 
   :before {

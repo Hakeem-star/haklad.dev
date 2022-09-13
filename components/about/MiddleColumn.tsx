@@ -1,74 +1,112 @@
-import React from "react";
 import { ColumnWrapper } from "./shared";
 import styled from "styled-components";
 import { colors } from "../../constants";
-
-const OutboundWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  justify-content: center;
-  text-align: center;
-  padding-bottom: 30px;
-  color: ${colors.witcher_text_gold};
-`;
-
-const OutboundItem = styled.div`
-  width: 55px;
-  height: 55px;
-  cursor: pointer;
-  border: 1px solid white;
-
-  :hover {
-    border: 5px solid white;
-  }
-`;
-
-const Outbound = styled.div`
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-
-  padding: 20px;
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  height: 100%;
-  width: 100%;
-`;
-
-const ImageArea = styled.div`
-  width: 99%;
-  min-height: 70%;
-  background: white;
-  padding: 10px;
-`;
+import Image from "next/image";
+import Code from "../../pages/assets/Code.svg";
+import Linkedin from "../../pages/assets/Linkedin.svg";
+import { useState } from "react";
+import {
+  Wrapper,
+  ImageArea,
+  OutboundWrapper,
+  OutboundTitle,
+  Outbound,
+  OutboundItem,
+  OutboundItemBG,
+  ImageWrapper,
+  CodeIcon,
+} from "./MiddleColumn.style";
+import Link from "next/link";
 
 type Props = {};
+enum HoveredItemText {
+  WORK = "Work",
+  GITHUB = "Github",
+  LINKEDIN = "LinkedIn",
+}
 
 const MiddleColumn = (props: Props) => {
+  const [hoveredItem, setHoveredItem] = useState<"" | HoveredItemText>("");
+
+  const unsetHoveredItem = () => {
+    setHoveredItem("");
+  };
+
   return (
     <ColumnWrapper>
       <Wrapper>
         {/* Add three js canvas that allows you to change lighting on a still image
         using the normal maps
         Find product that does this */}
-        {/* TODO - Display a traffic cone or similar whilst building this */}
 
-        <ImageArea></ImageArea>
+        <ImageArea>
+          <Image
+            src="/icons/traffic-cone.png"
+            alt="Picture of the author"
+            width={500}
+            height={500}
+          />
+          <p style={{ padding: 5 }}>Coming soon</p>
+        </ImageArea>
         <OutboundWrapper>
-          <p style={{ fontSize: 18 }}>TEXT</p>
+          <OutboundTitle>{/* Text here? */}</OutboundTitle>
           <Outbound>
-            {/* TODO - Images need to go above borders */}
-            <OutboundItem>Projects</OutboundItem>
-            <OutboundItem>Github</OutboundItem>
-            <OutboundItem>Linkedin</OutboundItem>
+            <Link href="/experiments">
+              <OutboundItem
+                onMouseEnter={() => {
+                  setHoveredItem(HoveredItemText.WORK);
+                }}
+                onMouseLeave={unsetHoveredItem}
+              >
+                <OutboundItemBG />
+                <ImageWrapper>
+                  <div>
+                    <CodeIcon />
+                  </div>
+                </ImageWrapper>
+              </OutboundItem>
+            </Link>
+            <Link href="/experiments">
+              <OutboundItem
+                onClick={() => {}}
+                onMouseEnter={() => {
+                  setHoveredItem(HoveredItemText.GITHUB);
+                }}
+                onMouseLeave={unsetHoveredItem}
+              >
+                <OutboundItemBG />
+                <ImageWrapper>
+                  <Image
+                    src="/icons/Octocat.png"
+                    alt="Github - Hakeem-star"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </ImageWrapper>
+              </OutboundItem>
+            </Link>
+            <Link href="/experiments">
+              <OutboundItem
+                onClick={() => {}}
+                onMouseEnter={() => {
+                  setHoveredItem(HoveredItemText.LINKEDIN);
+                }}
+                onMouseLeave={unsetHoveredItem}
+              >
+                <OutboundItemBG />
+                <ImageWrapper
+                  style={{
+                    padding: 8,
+                  }}
+                >
+                  <Linkedin color={colors.witcher_text_gold} />
+                </ImageWrapper>
+              </OutboundItem>
+            </Link>
           </Outbound>
-          <p style={{ fontSize: 18 }}>TEXT</p>
-          <p>TEXT</p>
+          {hoveredItem && (
+            <p style={{ fontSize: 18, fontWeight: "bold" }}>{hoveredItem}</p>
+          )}
         </OutboundWrapper>
       </Wrapper>
     </ColumnWrapper>
