@@ -17,6 +17,7 @@ import {
   CodeIcon,
 } from "./MiddleColumn.style";
 import Link from "next/link";
+import HoveredItem from "./HoveredItem";
 
 type Props = {};
 enum HoveredItemText {
@@ -29,7 +30,7 @@ const MiddleColumn = (props: Props) => {
   const [hoveredItem, setHoveredItem] = useState<"" | HoveredItemText>("");
 
   const unsetHoveredItem = () => {
-    setHoveredItem("");
+    // setHoveredItem("");
   };
 
   return (
@@ -104,9 +105,11 @@ const MiddleColumn = (props: Props) => {
               </OutboundItem>
             </Link>
           </Outbound>
-          {hoveredItem && (
-            <p style={{ fontSize: 18, fontWeight: "bold" }}>{hoveredItem}</p>
-          )}
+          {
+            // hoveredItem
+
+            true && <HoveredItem text={hoveredItem} />
+          }
         </OutboundWrapper>
       </Wrapper>
     </ColumnWrapper>
