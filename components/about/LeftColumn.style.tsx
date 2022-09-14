@@ -41,10 +41,12 @@ export const fadedHorizontalBasicBorderSvg = (color: string) =>
 </svg>`
   );
 
-export const squareCornerBorderSVG = (color: string) =>
+export const squareCornerBorderSVG = (color: string, fill?: boolean) =>
   encodeSVG(
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-1 -1 32 32">
-  <path d="M 0 10 l 10 0 L 10 0 l 10 0 l 0 10 l 10 0 L 30 20 L 20 20 L 20 30 L 10 30 L 10 20 L 0 20 Z" stroke="${color}" stroke-width="3" fill="none"/>
+  <path d="M 0 10 l 10 0 L 10 0 l 10 0 l 0 10 l 10 0 L 30 20 L 20 20 L 20 30 L 10 30 L 10 20 L 0 20 Z" stroke="${
+    !fill ? color : "none"
+  }" stroke-width="3" fill="${fill ? color : "none"}"/>
 </svg>`
   );
 

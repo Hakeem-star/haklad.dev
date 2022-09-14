@@ -44,7 +44,7 @@ export const FancyBorderWrapper = styled.div`
   }
 `;
 
-export const ColumnHeader = styled.p`
+export const ColumnHeader = styled.div`
   padding: 10px;
   font-size: 18px;
 
