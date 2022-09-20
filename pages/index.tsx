@@ -125,6 +125,8 @@ const Home: NextPage = () => {
           <H1 className={styles.title}>Hakeem Ladejobi</H1>
           <GradientOverlay />
         </div>
+        {/* TODO - use context to preserve the state, so when people return, 
+        they won't need to do this again */}
         {!started ? (
           <StartButton
             onClick={() => {

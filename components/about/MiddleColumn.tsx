@@ -2,7 +2,6 @@ import { ColumnWrapper } from "./shared";
 import styled from "styled-components";
 import { colors } from "../../constants";
 import Image from "next/image";
-import Code from "../../pages/assets/Code.svg";
 import Linkedin from "../../pages/assets/Linkedin.svg";
 import { useState } from "react";
 import {
@@ -11,8 +10,8 @@ import {
   OutboundWrapper,
   OutboundTitle,
   Outbound,
-  OutboundItem,
-  OutboundItemBG,
+  SquareCornerWhiteHoverBlock as OutboundItem,
+  SquareCornerWhiteHoverBlockBG,
   ImageWrapper,
   CodeIcon,
 } from "./MiddleColumn.style";
@@ -30,7 +29,7 @@ const MiddleColumn = (props: Props) => {
   const [hoveredItem, setHoveredItem] = useState<"" | HoveredItemText>("");
 
   const unsetHoveredItem = () => {
-    // setHoveredItem("");
+    setHoveredItem("");
   };
 
   return (
@@ -59,7 +58,7 @@ const MiddleColumn = (props: Props) => {
                 }}
                 onMouseLeave={unsetHoveredItem}
               >
-                <OutboundItemBG />
+                <SquareCornerWhiteHoverBlockBG />
                 <ImageWrapper>
                   <div>
                     <CodeIcon />
@@ -75,13 +74,18 @@ const MiddleColumn = (props: Props) => {
                 }}
                 onMouseLeave={unsetHoveredItem}
               >
-                <OutboundItemBG />
+                <SquareCornerWhiteHoverBlockBG />
                 <ImageWrapper>
                   <Image
-                    src="/icons/Octocat.png"
+                    src="/icons/GitHub-Mark-Light-120px-plus.png"
                     alt="Github - Hakeem-star"
                     layout="fill"
                     objectFit="cover"
+                    style={{
+                      // Colourise the image to match the other Icons - https://codepen.io/sosuke/pen/Pjoqqp
+                      filter:
+                        "invert(46%) sepia(3%) saturate(3553%) hue-rotate(2deg) brightness(86%) contrast(79%)",
+                    }}
                   />
                 </ImageWrapper>
               </OutboundItem>
@@ -94,7 +98,7 @@ const MiddleColumn = (props: Props) => {
                 }}
                 onMouseLeave={unsetHoveredItem}
               >
-                <OutboundItemBG />
+                <SquareCornerWhiteHoverBlockBG />
                 <ImageWrapper
                   style={{
                     padding: 8,

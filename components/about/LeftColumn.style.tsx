@@ -1,54 +1,10 @@
 import styled from "styled-components";
 import { colors } from "../../constants";
+import {
+  fadedHorizontalBasicBorderSvg,
+  squareCornerBorderSVG,
+} from "./shared/ui";
 import { encodeSVG } from "./util";
-
-export const fadedSquareCornerBorderSVG = (color: string) =>
-  encodeSVG(
-    `<svg xmlns='http://www.w3.org/2000/svg'  viewBox='-1 -1 33 33'>
-<defs>
-      <linearGradient id="lgrad" x1="0%" y1="0%" x2="0%" y2="90%">
-          <stop offset="50%" style="stop-color:${color};stop-opacity:1" />
-          <stop offset="65%" style="stop-color:${color};stop-opacity:0" />
-      </linearGradient>
-</defs>
-<path id='myText' d='M 0 10 l 10 0 L 10 0 l 10 0 l 0 10 l 10 0 L 30 20 L 20 20 L 20 30 L 10 30 L 10 20 L 0 20 Z' stroke='url(#lgrad)' stroke-width='1' fill='none'/>
-</svg>`
-  );
-
-export const fadedBasicBorderSvg = (color: string) =>
-  encodeSVG(
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-1 -1 12 12">
-  <defs>
-  <linearGradient id="lgrad" x1="0%" y1="0%" x2="0%" y2="90%">
-  <stop offset="50%" style="stop-color:${color};stop-opacity:1" />
-  <stop offset="65%" style="stop-color:${color};stop-opacity:0" />
-</linearGradient>
-  </defs>
-<path d="m 0 10 L 0 0 l 10 0 l 0 10 Z" stroke="url(#lgrad)" stroke-width="1" fill="none"/>
-</svg>`
-  );
-
-export const fadedHorizontalBasicBorderSvg = (color: string) =>
-  encodeSVG(
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-1 -1 12 12">
-  <defs>
-  <linearGradient id="lgrad" x1="0%" y1="0%" x2="90%" y2="00%">
-  <stop offset="50%" style="stop-color:${color};stop-opacity:1" />
-  <stop offset="65%" style="stop-color:${color};stop-opacity:0" />
-</linearGradient>
-  </defs>
-<path d="m 0 10 L 0 0 l 10 0 l 0 10 Z" stroke="url(#lgrad)" stroke-width="1" fill="none"/>
-</svg>`
-  );
-
-export const squareCornerBorderSVG = (color: string, fill?: boolean) =>
-  encodeSVG(
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-1 -1 32 32">
-  <path d="M 0 10 l 10 0 L 10 0 l 10 0 l 0 10 l 10 0 L 30 20 L 20 20 L 20 30 L 10 30 L 10 20 L 0 20 Z" stroke="${
-    !fill ? color : "none"
-  }" stroke-width="3" fill="${fill ? color : "none"}"/>
-</svg>`
-  );
 
 export const SummaryContent = styled.p`
   border: 6px solid transparent;

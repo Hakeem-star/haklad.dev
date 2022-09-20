@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { squareCornerBorderSVG } from "../LeftColumn.style";
-import { ColumnHeader } from "../shared/ui";
+import { colors } from "../../../constants";
+import { ColumnHeader, squareCornerBorderSVG } from "../shared/ui";
 import { getAge, getDaysToNextBday } from "./utils";
 
 const LevelDetails = styled.div`
@@ -71,10 +71,11 @@ const Level = styled.h2`
 
 const LevelLabel = styled.h2`
   margin-bottom: auto;
-  margin-right: 40px;
+  margin-right: 30px;
   margin-top: 4px;
 
   font-size: 1.2rem;
+  color: ${colors.witcher_text_faded};
 `;
 
 type Props = {};

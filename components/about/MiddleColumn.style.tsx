@@ -26,12 +26,15 @@ export const ImageWrapper = styled.div`
   }
 `;
 
-export const OutboundItemBG = styled.div`
+// Used as a child of SquareCornerWhiteHoverBlock to create a square block with 4 corner pattern that is white when hovered
+export const SquareCornerWhiteHoverBlockBG = styled.div`
   width: 100%;
   height: 100%;
   cursor: pointer;
   border: 1px solid ${colors.bestiary_section_border_inactive};
-  position: relative;
+  position: absolute;
+  inset: 0;
+
   ::before {
     content: "";
     width: calc(100% - 2px);
@@ -45,6 +48,30 @@ export const OutboundItemBG = styled.div`
       // encoded svg - https://yoksel.github.io/url-encoder/
       `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-1 -1 32 32'%3E%3Cpath d='M 0 10 l 10 0 L 10 0 l 10 0 l 0 10 l 10 0 L 30 20 L 20 20 L 20 30 L 10 30 L 10 20 L 0 20 Z' stroke='${colors.bestiary_section_border_inactive}' stroke-width='3' fill='none'/%3E%3C/svg%3E")`};
     border-image-slice: 40%;
+  }
+
+  // allows us to click on items above/below this
+  z-index: -1;
+`;
+
+// Used in combination with SquareCornerWhiteHoverBlockBG to create a square block with 4 corner pattern that is white when hovered
+export const SquareCornerWhiteHoverBlock = styled.button`
+  background: transparent;
+  color: inherit;
+  position: relative;
+  height: 55px;
+  width: 55px;
+  overflow: visible;
+  cursor: pointer;
+
+  :hover ${SquareCornerWhiteHoverBlockBG} {
+    border: 1px solid ${colors.white};
+
+    ::before {
+      border-image-source: ${() =>
+        // encoded svg - https://yoksel.github.io/url-encoder/
+        `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-1 -1 32 32'%3E%3Cpath d='M 0 10 l 10 0 L 10 0 l 10 0 l 0 10 l 10 0 L 30 20 L 20 20 L 20 30 L 10 30 L 10 20 L 0 20 Z' stroke='${colors.white}' stroke-width='3' fill='none'/%3E%3C/svg%3E")`};
+    }
   }
 `;
 
@@ -62,26 +89,6 @@ export const OutboundWrapper = styled.div`
   text-align: center;
   padding-bottom: 30px;
   color: ${colors.witcher_text_gold};
-`;
-
-export const OutboundItem = styled.button`
-  background: transparent;
-  color: inherit;
-  position: relative;
-  height: 55px;
-  width: 55px;
-  overflow: visible;
-  cursor: pointer;
-
-  :hover ${OutboundItemBG} {
-    border: 1px solid ${colors.white};
-
-    ::before {
-      border-image-source: ${() =>
-        // encoded svg - https://yoksel.github.io/url-encoder/
-        `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-1 -1 32 32'%3E%3Cpath d='M 0 10 l 10 0 L 10 0 l 10 0 l 0 10 l 10 0 L 30 20 L 20 20 L 20 30 L 10 30 L 10 20 L 0 20 Z' stroke='${colors.white}' stroke-width='3' fill='none'/%3E%3C/svg%3E")`};
-    }
-  }
 `;
 
 export const Outbound = styled.div`

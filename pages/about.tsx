@@ -4,11 +4,10 @@ import styled from "styled-components";
 import MiddleColumn from "../components/about/MiddleColumn";
 import { LeftColumn } from "../components/about/LeftColumn";
 import { RightColumn } from "../components/about/RightColumn";
-import { ColumnHeader } from "../components/about/shared/ui";
-import { squareCornerBorderSVG } from "../components/about/LeftColumn.style";
 import LevelDetails from "../components/about/LevelDetails";
-
-const Close = styled.div``;
+import { CloseIcon } from "../components/about/CloseIcon";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Header = styled.div`
   display: flex;
@@ -20,8 +19,9 @@ const Header = styled.div`
 `;
 
 const Name = styled.h2`
-  /* transform: translateX(50%); */
-  /* width: fit-content; */
+  width: fit-content;
+  align-self: flex-start;
+  margin-top: 0.55rem;
 `;
 
 const Wrapper = styled.div`
@@ -54,8 +54,11 @@ type Props = {};
 // Level - keeps track of current age and the bar reflects how close it is to bday
 // Weight - unsure
 // Money - 5 coins
+// Add page transitions -  smoke like reveal/columns animating
 
 const About = ({}: Props) => {
+  const router = useRouter();
+
   return (
     <Wrapper>
       <Header>
@@ -63,7 +66,15 @@ const About = ({}: Props) => {
         {/* Include nav to go back home or maybe navigate to experiments page */}
         {/* TODO make this value dynamic based on year */}
         <LevelDetails />
-        <Close></Close>
+        {/* <Link href="/" passHref>
+          <a> */}
+        <CloseIcon
+          onClick={() => {
+            router.push("/");
+          }}
+        />
+        {/* </a>
+        </Link> */}
       </Header>
       <Columns>
         <LeftColumn />
