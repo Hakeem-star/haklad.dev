@@ -122,6 +122,7 @@ const Home: NextPage = () => {
         </VolumeContainer>
 
         <div style={{ position: "relative", padding: 20 }}>
+          {/* TODO - After clicking start, this should animate up and the items can stagger in */}
           <H1 className={styles.title}>Hakeem Ladejobi</H1>
           <GradientOverlay />
         </div>
