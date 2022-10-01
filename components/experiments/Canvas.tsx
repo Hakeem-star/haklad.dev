@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { generateRain } from "./utils/generateRain";
+import { perlinNoise } from "./utils/perlinNoise";
 const CanvasWrapper = styled.canvas`
   position: fixed;
   inset: 0;
@@ -38,6 +39,7 @@ const Canvas = (props: Props) => {
     return ctx;
   };
 
+  // setup
   useEffect(() => {
     const ctx = getContext();
     if (!ctx) return;
@@ -50,6 +52,20 @@ const Canvas = (props: Props) => {
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
   }, []);
 
+  // clouds
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    perlinNoise(
+      canvas,
+      { r: 0, g: 0, b: 0 },
+      { r: 119, g: 200, b: 255 },
+      1,
+      1.4
+    );
+  }, []);
+
+  // skyline
   useEffect(() => {
     const ctx = getContext();
     if (!ctx) return;
@@ -65,6 +81,7 @@ const Canvas = (props: Props) => {
     return () => {};
   }, []);
 
+  // bridge
   useEffect(() => {
     const ctx = getContext();
     if (!ctx) return;
@@ -81,29 +98,30 @@ const Canvas = (props: Props) => {
     return () => {};
   }, []);
 
-  useEffect(() => {
-    const ctx = getContext();
-    if (!ctx) return;
+  //   // rain
+  //   useEffect(() => {
+  //     const ctx = getContext();
+  //     if (!ctx) return;
 
-    const rain = generateRain(ctx);
+  //     const rain = generateRain(ctx);
 
-    const run = () => {
-      // clear canvas
-      ctx.fillStyle = "white";
-      ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+  //     const run = () => {
+  //       // clear canvas
+  //       //   ctx.fillStyle = "white";
+  //       ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-      if (skylinesRef.current) {
-        drawSkyline(ctx, skylinesRef.current);
-      }
-      if (bridgeRef.current) {
-        drawBridge(ctx, bridgeRef.current);
-      }
-      rain();
-      requestAnimationFrame(run);
-    };
+  //       if (skylinesRef.current) {
+  //         drawSkyline(ctx, skylinesRef.current);
+  //       }
+  //       if (bridgeRef.current) {
+  //         drawBridge(ctx, bridgeRef.current);
+  //       }
+  //       rain();
+  //       requestAnimationFrame(run);
+  //     };
 
-    run();
-  }, []);
+  //     run();
+  //   }, []);
 
   return <CanvasWrapper ref={canvasRef} />;
 };
