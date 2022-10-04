@@ -1,11 +1,9 @@
 /** @type {import('next').NextConfig} */
+const withTM = require("next-transpile-modules")(["three"]);
+
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  compiler: {
-    styledComponents: true,
-  },
-
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,
@@ -15,6 +13,14 @@ const nextConfig = {
 
     return config;
   },
+  compiler: {
+    styledComponents: true,
+  },
 };
 
-module.exports = nextConfig;
+module.exports = (_phase, { defaultConfig }) => {
+  const plugins = [withTM];
+  return plugins.reduce((acc, plugin) => plugin(acc), {
+    ...nextConfig,
+  });
+};
