@@ -54,6 +54,9 @@ const List = styled.ul`
 `;
 
 const FG = styled.div`
+  // whilst we position threejs
+  pointer-events: none;
+
   width: 1350px;
   max-width: 1350px;
   height: 800px;
