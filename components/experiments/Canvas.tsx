@@ -1,5 +1,12 @@
-import { Environment, useTexture } from "@react-three/drei";
-import { Canvas as ThreeCanvas } from "@react-three/fiber";
+import {
+  Environment,
+  MapControlsProps,
+  MeshReflectorMaterial,
+  useTexture,
+  MapControls,
+} from "@react-three/drei";
+import { MapControls as MapControlsImpl } from "three-stdlib";
+import { Canvas as ThreeCanvas, useThree } from "@react-three/fiber";
 import {
   DepthOfField,
   EffectComposer,
@@ -7,10 +14,12 @@ import {
   Vignette,
 } from "@react-three/postprocessing";
 import { useControls } from "leva";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import styled from "styled-components";
-import { DirectionalLight } from "three";
+import { DirectionalLight, Vector3, WebGLCubeRenderTarget } from "three";
 import { Bridge } from "./Bridge";
+
+const cameraDefaultPosition = [0, 0, 5];
 
 const Wrapper = styled.div`
   position: absolute;
@@ -166,7 +175,7 @@ const Canvas = (props: Props) => {
 
   return (
     <Wrapper>
-      <ThreeCanvas camera={{ position: [0, 0, 5] }}>
+      <ThreeCanvas camera={{ position: cameraDefaultPosition }}>
         <Scene />
         <EffectComposer>
           <DepthOfField
@@ -175,7 +184,7 @@ const Canvas = (props: Props) => {
             bokehScale={1.3}
           />
           {/* <Noise opacity={0.02} /> */}
-          <Vignette eskil={false} offset={0.1} darkness={1.1} />
+          {/* <Vignette eskil={false} offset={0.1} darkness={1.1} /> */}
         </EffectComposer>
       </ThreeCanvas>
     </Wrapper>
@@ -183,20 +192,91 @@ const Canvas = (props: Props) => {
 };
 
 function Scene() {
-  const [skyline, bridge] = useTexture([
-    "./images/new-york-skyline-edited.png",
-    "./images/pngfind.com-bridge-png-517681.png",
-  ]);
+  const { gl, scene, camera } = useThree();
+  const { panX, panZ } = useControls({
+    panX: {
+      min: -0.15,
+      max: 0.15,
+      value: 0,
+    },
+    panZ: {
+      min: -0.0025,
+      max: 0.0025,
+      value: 0.001,
+    },
+  });
+
+  // useEffect(() => {
+  //   camera.position.setX(panX);
+  //   camera.position.setZ(panZ);
+  // }, [camera, panX, panZ]);
+
+  const skyBox = useTexture(
+    "./images/rural_winter_roadside.jpg",
+    (textures) => {
+      const skyBoxTexture = Array.isArray(textures) ? textures[0] : textures;
+
+      const rt = new WebGLCubeRenderTarget(skyBoxTexture.image.height);
+      rt.fromEquirectangularTexture(gl, skyBoxTexture);
+      scene.background = rt.texture;
+    }
+  );
+
+  const [skyline, bridge] = useTexture(
+    [
+      "./images/new-york-skyline-edited.png",
+      "./images/pngfind.com-bridge-png-517681.png",
+      "./images/rural_winter_roadside.jpg",
+    ],
+    (textures) => {
+      if (Array.isArray(textures)) {
+        const skyBoxTexture = textures[2];
+
+        const rt = new WebGLCubeRenderTarget(skyBoxTexture.image.height);
+        rt?.fromEquirectangularTexture(gl, skyBoxTexture);
+        scene.background = rt.texture;
+      }
+    }
+  );
 
   const skylineRatio = skyline.image.width / skyline.image.height;
   const bridgeRatio = bridge.image.width / bridge.image.height;
   const light = useRef<DirectionalLight>(null);
+  const controlsRef = useRef<MapControlsImpl>(null);
 
+  useEffect(() => {
+    const controls = controlsRef.current;
+    if (!controls) return;
+
+    controls?.addEventListener("change", function () {
+      if (controls.target.x < -0.15) {
+        controls.target.x = -0.15;
+        camera.position.x = -0.15;
+      } else if (controls.target.x > 0.15) {
+        controls.target.x = 0.15;
+        camera.position.x = 0.15;
+      }
+
+      if (controls.target.z < -0.02) {
+        controls.target.z = -0.02;
+        camera.position.z = cameraDefaultPosition[2] + -0.02;
+      } else if (controls.target.z > 0.02) {
+        controls.target.z = 0.02;
+        camera.position.z = cameraDefaultPosition[2] + 0.02;
+      }
+    });
+  }, []);
   return (
     <>
-      <fog attach="fog" args={["#14102b", 0.3, 40]} />
+      <MapControls
+        enableDamping
+        dampingFactor={0.05}
+        ref={controlsRef}
+        enableRotate={false}
+      />
+      <fog attach="fog" args={["#b9b9b9", 1, 20]} />
+      <ambientLight intensity={1} />
 
-      <ambientLight intensity={0.3} />
       <directionalLight
         intensity={0.7}
         castShadow
@@ -217,20 +297,21 @@ function Scene() {
       />
 
       {/* reflective water */}
-      {/* <mesh position={[0, -1.5, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-          <planeGeometry args={[50, 50]} />
-          <MeshReflectorMaterial
-            blur={[400, 100]}
-            resolution={1024}
-            mixBlur={1}
-            mixStrength={15}
-            depthScale={1}
-            minDepthThreshold={0.85}
-            color="#151515"
-            metalness={0.6}
-            roughness={1}
-          />
-        </mesh> */}
+      <mesh position={[0, -2.4, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+        <planeGeometry args={[50, 20]} />
+        <MeshReflectorMaterial
+          mirror={0}
+          blur={[400, 100]}
+          resolution={1024}
+          mixBlur={1}
+          mixStrength={15}
+          depthScale={1}
+          minDepthThreshold={0.85}
+          color="#151515"
+          // metalness={0.6}
+          roughness={1}
+        />
+      </mesh>
     </>
   );
 }
