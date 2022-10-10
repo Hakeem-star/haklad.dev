@@ -1,9 +1,9 @@
 {
   "extends": ["next/core-web-vitals", "prettier"],
   "rules": {
-    // "no-console": "error",
-    // "no-unused-vars": "error",
     "no-debugger": "warn",
-    "no-unsafe-negation": "error"
+    "no-unsafe-negation": "error",
+    // strange behaviour with eslint where r3f props are not recognised
+    "react/no-unknown-property": "off"
   }
 }
