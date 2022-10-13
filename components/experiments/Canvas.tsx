@@ -19,6 +19,7 @@ import styled from "styled-components";
 import { DirectionalLight, Vector3, WebGLCubeRenderTarget } from "three";
 import { Bridge } from "./Bridge";
 import { lerp, mapLinear } from "three/src/math/MathUtils";
+import Rain from "./Rain";
 
 const cameraDefaultPosition = [0, 0, 5];
 
@@ -101,13 +102,9 @@ function Scene() {
     // scene.background = rt.texture;
   });
 
-  const [skyline, bridge] = useTexture([
-    "./images/new-york-skyline-edited.png",
-    "./images/pngfind.com-bridge-png-517681.png",
-  ]);
+  const [skyline] = useTexture(["./images/new-york-skyline-edited.png"]);
 
   const skylineRatio = skyline.image.width / skyline.image.height;
-  const bridgeRatio = bridge.image.width / bridge.image.height;
   const light = useRef<DirectionalLight>(null);
   const controlsRef = useRef<MapControlsImpl>(null);
 
@@ -140,7 +137,7 @@ function Scene() {
         enableDamping
         dampingFactor={0.05}
         ref={controlsRef}
-        enabled={false}
+        // enabled={false}
       />
       <fog attach="fog" args={["#b9b9b9", 1, 20]} />
       <ambientLight intensity={1} />
@@ -180,6 +177,7 @@ function Scene() {
           roughness={1}
         />
       </mesh>
+      <Rain />
     </>
   );
 }
