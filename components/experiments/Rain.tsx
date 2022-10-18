@@ -21,11 +21,11 @@ import { RainMaterial, RainMaterialImpl } from "./RainMaterial";
 
 type Props = {};
 
-const minSize = 0.2;
+const minSize = 0.1;
 const maxSize = 1;
 const minAngle = 44.95;
 const maxAngle = 65.05;
-const totalCount = 1000;
+const totalCount = 6000;
 const speed = 2;
 
 let maxX = 100;
@@ -33,13 +33,13 @@ let maxY = -40;
 
 function getPosition() {
   let minX = -100;
-  let maxX = 100;
+  let maxX = 200;
 
   let minY = 100;
   let maxY = -40;
 
   let minZ = -15;
-  let maxZ = 40;
+  let maxZ = 60;
 
   let randX = Math.random() * (maxX - minX) + minX;
   let randY = Math.random() * (maxY - minY) + minY;
@@ -94,6 +94,11 @@ const positionsBuffer = new Float32Array(
     .fill(null)
     .flatMap(() => getPosition())
 );
+const positionsBuffer2 = new Float32Array(
+  Array(totalCount)
+    .fill(null)
+    .flatMap(() => getPosition())
+);
 const anglesBuffer = new Float32Array(
   Array(totalCount)
     .fill(null)
@@ -120,13 +125,17 @@ const Rain = (props: Props) => {
     if (!points) return;
     points.geometry.setAttribute("angle", new BufferAttribute(anglesBuffer, 1));
     points.geometry.setAttribute("size", new BufferAttribute(sizesBuffer, 1));
+    points.geometry.setAttribute(
+      "initPos",
+      new BufferAttribute(positionsBuffer2, 3)
+    );
     console.log(points);
   }, []);
 
   useFrame(({ clock }) => {
     if (!rainMaterialRef.current) return;
+    // limit to 3 seconds
     rainMaterialRef.current.uTime = clock.getElapsedTime();
-
     // Update position of all drops
     // for (let i = 0; i < positionsBuffer.length / 3; i++) {
     //   const pos = positionsBuffer.slice(i * 3, i * 3 + 3);
@@ -156,6 +165,10 @@ const Rain = (props: Props) => {
     //     positionsBuffer[i * 3 + 2] = newPos[2];
     //   }
     // }
+
+    // const points = pointsRef.current;
+    // if (!points) return;
+    // points.geometry.setAttribute("angle", new BufferAttribute(anglesBuffer, 1));
   });
 
   const [rainDropTexture] = useTexture(["./images/rain-drop-texture.png"]);
@@ -174,7 +187,7 @@ const Rain = (props: Props) => {
       <Points
         ref={pointsRef}
         // @ts-ignore
-        test={positionsBuffer}
+        // test={positionsBuffer}
         // ref={pointsRef}
         positions={positionsBuffer}
         // sizes={sizesBuffer}
@@ -194,9 +207,9 @@ const Rain = (props: Props) => {
           // opacity={0.2}
           transparent
           // alphaMap={rainDropTexture}
-          // alphaTest={0.001}
+          alphaTest={0.001}
           depthWrite={false}
-          // blending={AdditiveBlending}
+          blending={AdditiveBlending}
         />
       </Points>
     </>
