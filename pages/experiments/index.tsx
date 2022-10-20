@@ -55,14 +55,14 @@ const List = styled.ul`
 
 const FG = styled.div`
   // whilst we position threejs
-  pointer-events: none;
+  /* pointer-events: none; */
+  /* z-index: 1; */
 
   width: 1350px;
   max-width: 1350px;
   height: 800px;
   margin: auto;
   padding: 0 50px;
-  z-index: 1;
 `;
 
 const Item = styled.li`
@@ -111,31 +111,33 @@ type Props = {};
 
 const Experiments = (props: Props) => {
   return (
-    <Wrapper>
+    <>
       <Canvas />
-      {/* <BridgeLayer /> */}
-      <FG>
-        {/* TODO - Background will use a canvas to generate rain and background image of bridge */}
-        <TitleWrapper>
-          <Title>Experiments</Title>
-        </TitleWrapper>
-        <List>
-          <Item>
-            <Link href="/experiments/circleEyes">Circle Eye</Link>
-          </Item>
-          <Item>
-            <Link href="/experiments/octopus">Octopus</Link>
-          </Item>
-          <Item>
-            <Link href="/experiments/radar">Radar</Link>
-          </Item>
-        </List>
+      <Wrapper>
+        {/* <BridgeLayer /> */}
+        <FG>
+          {/* TODO - Background will use a canvas to generate rain and background image of bridge */}
+          <TitleWrapper>
+            <Title>Experiments</Title>
+          </TitleWrapper>
+          <List>
+            <Item>
+              <Link href="/experiments/circleEyes">Circle Eye</Link>
+            </Item>
+            <Item>
+              <Link href="/experiments/octopus">Octopus</Link>
+            </Item>
+            <Item>
+              <Link href="/experiments/radar">Radar</Link>
+            </Item>
+          </List>
 
-        <Link href="/">
-          <BackButton>Back</BackButton>
-        </Link>
-      </FG>
-    </Wrapper>
+          <Link href="/">
+            <BackButton>Back</BackButton>
+          </Link>
+        </FG>
+      </Wrapper>
+    </>
   );
 };
 
