@@ -97,13 +97,12 @@ const Item = styled.li`
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
-  background-color: ${colors.white};
-  /* background-image: url("./images/new-york-skyline.png"); */
+
   background-repeat: no-repeat;
   background-position: -70px 80%;
   background-size: 110%;
   display: flex;
-
+  position: relative;
   font-family: AmiriQuran-Regular;
 `;
 

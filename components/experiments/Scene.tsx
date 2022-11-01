@@ -1,14 +1,16 @@
 import { MapControls } from "@react-three/drei";
 import { MapControls as MapControlsImpl } from "three-stdlib";
 import { useFrame, useThree } from "@react-three/fiber";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { DirectionalLight } from "three";
 import { Bridge } from "./Bridge";
 import { lerp, mapLinear } from "three/src/math/MathUtils";
+import Sky from "./Sky";
 import Rain from "./Rain";
 import Skyline from "./Skyline";
 import River from "./River";
 import { cameraDefaultPosition } from "./constants";
+import useMousePosition from "hooks/useMousePosition";
 
 function Scene() {
   const { camera } = useThree();
@@ -16,10 +18,16 @@ function Scene() {
   const light = useRef<DirectionalLight>(null);
   const controlsRef = useRef<MapControlsImpl>(null);
 
+  const { x, y } = useMousePosition({
+    options: { centerOrigin: true, normalise: true },
+  });
+
   useFrame((state) => {
-    // mouse values are 0 - 1
-    const xPos = state.mouse.x;
-    const yPos = state.mouse.y;
+    /* For whatever reason, state.mouse would not give me the mouse position
+ when I was hovered over a html element */
+
+    const xPos = x || 0;
+    const yPos = y || 0;
 
     const camX = mapLinear(xPos, 0, 1, -0.1, 0.02);
     const camZ = mapLinear(yPos, 0, 1, -0.04, 0.02);
@@ -57,7 +65,7 @@ function Scene() {
         ref={light}
         position={[10, 10, 10]}
       />
-
+      <Sky scale={1} position={[0, 0, -3]} />
       <Skyline />
       <Bridge
         rotation={[0, 1.1, 0]}
