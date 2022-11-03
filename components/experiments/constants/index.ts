@@ -4,7 +4,7 @@ export const rain = {
   minSize: 0.1,
 
   maxSize: 1,
-  minAngle: 44.95,
+  minAngle: 15.0,
 
-  maxAngle: 65.05,
+  maxAngle: 20.0,
 };

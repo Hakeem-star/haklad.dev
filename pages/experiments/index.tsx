@@ -97,6 +97,7 @@ const Item = styled.li`
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
+  user-select: none;
 
   background-repeat: no-repeat;
   background-position: -70px 80%;
