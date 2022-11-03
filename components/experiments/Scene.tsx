@@ -67,12 +67,12 @@ function Scene() {
       />
       <Sky scale={1} position={[0, 0, -3]} />
       <Skyline />
+      <River />
       <Bridge
         rotation={[0, 1.1, 0]}
         position={[-7.2, -3.6, -0.5]}
         scale={0.6}
       />
-      <River />
       <Rain />
     </>
   );
