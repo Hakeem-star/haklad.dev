@@ -4,7 +4,7 @@ import { Color, Texture } from "three";
 const glsl = (x: any) => `${x}`;
 
 export const SkyMaterial = shaderMaterial(
-  { uColor: new Color(0.2, 0.0, 0.1), uAngle: 0, uSpeed: 1.2, uTime: 0 },
+  { uColor: new Color(0.2, 0.0, 0.1), uTime: 0 },
   // vertex shader
   glsl`
 
@@ -24,6 +24,7 @@ export const SkyMaterial = shaderMaterial(
   // fragment shader
   glsl`
   uniform vec3 uColor;
+  uniform float uTime;
   uniform vec2 u_resolution;  // Canvas size (width,height)
   varying vec2 vUv;
 
@@ -109,6 +110,7 @@ void main()
   // Clouds
   vec2 st = (gl_FragCoord.xy) * 0.017;
   st.x *=  0.30;
+  st.x +=  uTime * 0.05;
 
   vec2 pos = st * 0.7;
 
@@ -127,6 +129,7 @@ gl_FragColor = vec4((color * 0.36) , 1.0);
 
 export type SkyMaterialImpl = {
   uColor?: THREE.Color;
+  uTime?: number;
 } & JSX.IntrinsicElements["shaderMaterial"];
 
 declare global {
