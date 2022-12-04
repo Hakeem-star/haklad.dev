@@ -86,7 +86,7 @@ const StartMenu = ({ handleLinkHover, className }: Props) => {
         <li>
           <Link
             style={{ color: "white" }}
-            href="https://hakeems-anime-site.herokuapp.com/"
+            href="https://anime-site-hakeem.vercel.app/"
             passHref
           >
             <StyledLink onMouseEnter={handleLinkHover} target="_blank">
