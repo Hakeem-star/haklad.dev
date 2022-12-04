@@ -110,15 +110,24 @@ void main()
   // Clouds
   vec2 st = (gl_FragCoord.xy) * 0.017;
   st.x *=  0.30;
+
+  // movement
   st.x +=  uTime * 0.05;
 
   vec2 pos = st * 0.7;
+  
+
 
   float n = snoise(pos);
+  float nSharp = snoise(pos * 1.4);
   float n2 = snoise(pos * 0.3);
   float nLarge = snoise(pos * 0.8) * .8;
-  vec3 color = vec3(n*n2+nLarge)*.5+.5;
-  color.r += 0.4;
+  vec3 color = vec3(nSharp * n*n2+nLarge)*.5+.5;
+  
+float clouds = nSharp * n*n2+nLarge;
+
+
+  color.r += 0.45;
   color.g += 0.6;
   color.b += 0.8;
 

@@ -21,7 +21,7 @@ export function Bridge(props: GroupProps) {
         }
         // material={materials["Default OBJ"]}
       >
-        <meshStandardMaterial color="#2e2d2d" />
+        <meshLambertMaterial color="#000000" />
       </mesh>
     </group>
   );

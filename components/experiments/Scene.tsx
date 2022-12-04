@@ -56,9 +56,9 @@ function Scene() {
         // Disables the ability to move the camera
         enabled={false}
       />
-      <fog attach="fog" args={["#b9b9b9", 1, 20]} />
-      <ambientLight intensity={1} />
-
+      <fog attach="fog" args={["#85858a", 0.1, 10]} />
+      <ambientLight color={"#4141c5"} intensity={1} />
+      <hemisphereLight args={["#CEE7FC", "#183A59", 2]} />
       <directionalLight
         intensity={0.7}
         castShadow

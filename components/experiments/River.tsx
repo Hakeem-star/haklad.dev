@@ -1,9 +1,10 @@
-import { MeshReflectorMaterial } from "@react-three/drei";
+import { MeshReflectorMaterial, shaderMaterial } from "@react-three/drei";
 import React from "react";
 
 type Props = {};
-
+// TODO: Add ripples
 const River = (props: Props) => {
+  shaderMaterial;
   return (
     <>
       <mesh position={[0, -2.4, 0]} rotation={[-Math.PI / 2, 0, 0]}>
@@ -18,7 +19,7 @@ const River = (props: Props) => {
           minDepthThreshold={0.85}
           color="#151515"
           // metalness={0.6}
-          roughness={1}
+          roughness={0.2}
         />
       </mesh>
     </>
