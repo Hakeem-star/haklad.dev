@@ -43,8 +43,8 @@ vec3 randomPosition(){
   float minX = -100.0;
   float maxX = 100.0;
 
-  float minY = 100.0;
-  float maxY = -40.0;
+  float minY = 10.0;
+  float maxY = -10.0;
 
   float minZ = -15.0;
   float maxZ = 40.0;
@@ -88,7 +88,7 @@ vec3 randomPosition(){
     newPos.x = angleX - mod(uTime * (vSize / 30.0 * uSpeed), 100.0);
     
     float angleY = newPos.y * sin((PI * angle) / 180.0);
-    newPos.y = angleY - mod(uTime * (vSize / 30.0 * uSpeed),  600.0);
+    newPos.y = angleY - mod(uTime * (vSize / 30.0 * uSpeed),  60.0);
     
     vec4 modelPosition = modelMatrix * vec4(newPos, 1.0);
     vec4 viewPosition = viewMatrix * modelPosition;

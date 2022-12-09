@@ -9,7 +9,7 @@ import { getPosition, getRandomAngle, getRandomSize } from "./utils/rain";
 
 type Props = {};
 
-const totalCount = 6000;
+const totalCount = 1500;
 
 const positionsBuffer = new Float32Array(
   Array(totalCount)
