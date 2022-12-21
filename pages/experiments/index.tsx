@@ -4,6 +4,36 @@ import styled from "styled-components";
 import Canvas from "../../components/experiments/Canvas";
 import { colors } from "../../constants";
 
+const BackIcon = styled.div`
+  display: flex;
+  width: 14px;
+  height: 14px;
+  background-color: #b8b5b0;
+  border-radius: 2px;
+`;
+
+const BackButton = styled.div`
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  font-size: 28px;
+  margin-top: auto;
+  cursor: pointer;
+
+  p {
+    position: relative;
+    top: -8px;
+  }
+
+  &:hover {
+    ${BackIcon} {
+      background-color: black;
+    }
+  }
+`;
+
 const TitleWrapper = styled.div`
   height: 70px;
   width: fit-content;
@@ -20,11 +50,6 @@ const Title = styled.h1`
   line-height: 1;
 
   font-size: 44px;
-`;
-
-const BackButton = styled.button`
-  position: absolute;
-  bottom: 80px;
 `;
 
 const List = styled.ul`
@@ -45,6 +70,9 @@ const FG = styled.div`
   height: 800px;
   margin: auto;
   padding: 0 50px;
+
+  display: flex;
+  flex-direction: column;
 `;
 
 const Item = styled.li`
@@ -56,8 +84,6 @@ const Item = styled.li`
   display: flex;
   align-items: center;
 
-  // helps visibility whilst we have no background
-  /* opacity: 0.4; */
   color: black;
 
   // fixes potential line height issue
@@ -87,8 +113,6 @@ const Wrapper = styled.div`
   display: flex;
   position: relative;
   font-family: AmiriQuran-Regular;
-
-  /* pointer-events: none; */
 `;
 
 type Props = {};
@@ -99,7 +123,6 @@ const Experiments = (props: Props) => {
       <Canvas />
       <Wrapper>
         <FG>
-          {/* TODO - Background will use a canvas to generate rain and background image of bridge */}
           <TitleWrapper>
             <Title>Experiments</Title>
           </TitleWrapper>
@@ -116,7 +139,10 @@ const Experiments = (props: Props) => {
           </List>
 
           <Link href="/">
-            <BackButton>Back</BackButton>
+            <BackButton>
+              <BackIcon />
+              <p>Back</p>
+            </BackButton>
           </Link>
         </FG>
       </Wrapper>
