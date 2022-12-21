@@ -1,4 +1,4 @@
-import { MapControls } from "@react-three/drei";
+import { MapControls, OrbitControls } from "@react-three/drei";
 import { MapControls as MapControlsImpl } from "three-stdlib";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
@@ -11,6 +11,7 @@ import Skyline from "./Skyline";
 import River from "./River";
 import { cameraDefaultPosition } from "./constants";
 import useMousePosition from "hooks/useMousePosition";
+import { useControls } from "leva";
 
 function Scene() {
   const { camera } = useThree();
@@ -20,6 +21,10 @@ function Scene() {
 
   const { x, y } = useMousePosition({
     options: { centerOrigin: true, normalise: true },
+  });
+
+  const { disableManualCamera } = useControls({
+    disableManualCamera: true,
   });
 
   useFrame((state) => {
@@ -33,7 +38,7 @@ function Scene() {
     const camZ = mapLinear(yPos, 0, 1, -0.04, 0.02);
 
     const controls = controlsRef.current;
-    if (!controls) return;
+    if (!controls || !disableManualCamera) return;
 
     // ease the movement of the camera
     controls.target.x = lerp(controls.target.x, camX, 0.1);
@@ -49,14 +54,16 @@ function Scene() {
 
   return (
     <>
+      {/* <OrbitControls /> */}
       <MapControls
         enableDamping
         dampingFactor={0.05}
         ref={controlsRef}
         // Disables the ability to move the camera
-        enabled={false}
+        enabled={!disableManualCamera}
       />
       <fog attach="fog" args={["#85858a", 0.1, 10]} />
+      <pointLight position={[0, -5, -10]} intensity={100.0} />
       <ambientLight color={"#4141c5"} intensity={1} />
       <hemisphereLight args={["#CEE7FC", "#183A59", 2]} />
       <directionalLight

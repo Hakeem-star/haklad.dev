@@ -13,7 +13,7 @@ const Sky = (props: MeshProps) => {
     meshRef.current.uTime = clock.getElapsedTime();
   });
   return (
-    <mesh visible {...props}>
+    <mesh receiveShadow castShadow visible {...props}>
       <planeGeometry args={[40, 20]} />
       <skyMaterial
         ref={meshRef}

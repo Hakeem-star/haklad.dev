@@ -4,20 +4,6 @@ import styled from "styled-components";
 import Canvas from "../../components/experiments/Canvas";
 import { colors } from "../../constants";
 
-const BridgeLayer = styled.div`
-  background-image: url("./images/pngfind.com-bridge-png-517681.png");
-  background-repeat: no-repeat;
-  background-position: 0px 102px;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  background-size: 150%;
-  position: absolute;
-  transform: scaleX(-1);
-
-  position: absolute;
-`;
-
 const TitleWrapper = styled.div`
   height: 70px;
   width: fit-content;
@@ -54,10 +40,6 @@ const List = styled.ul`
 `;
 
 const FG = styled.div`
-  // whilst we position threejs
-  /* pointer-events: none; */
-  /* z-index: 1; */
-
   width: 1350px;
   max-width: 1350px;
   height: 800px;
@@ -105,6 +87,8 @@ const Wrapper = styled.div`
   display: flex;
   position: relative;
   font-family: AmiriQuran-Regular;
+
+  /* pointer-events: none; */
 `;
 
 type Props = {};
@@ -114,7 +98,6 @@ const Experiments = (props: Props) => {
     <>
       <Canvas />
       <Wrapper>
-        {/* <BridgeLayer /> */}
         <FG>
           {/* TODO - Background will use a canvas to generate rain and background image of bridge */}
           <TitleWrapper>
