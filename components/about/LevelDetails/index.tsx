@@ -5,7 +5,6 @@ import { ColumnHeader, squareCornerBorderSVG } from "../shared/ui";
 import { getAge, getDaysToNextBday } from "./utils";
 
 const LevelDetails = styled.div`
-  margin-left: auto;
   display: flex;
   align-items: center;
 `;

@@ -1,18 +1,15 @@
-import React from "react";
 import { skillData } from "./constants";
 import {
   Details,
-  DetailsWrapper,
   DetailsItem,
   DetailsItemWrapper,
+  DetailsWrapper,
   FadedBackground,
   ItemsWrapper,
   Summary,
   SummaryContent,
 } from "./LeftColumn.style";
 import { ColumnWrapper } from "./shared";
-import styled from "styled-components";
-import { colors } from "../../constants";
 import { ColumnHeader, FancyBorderWrapper } from "./shared/ui";
 
 /* clip-path: polygon(
@@ -50,7 +47,7 @@ type Props = {};
 
 export const LeftColumn = (props: Props) => {
   return (
-    <ColumnWrapper>
+    <ColumnWrapper className="leftColumn">
       <FancyBorderWrapper>
         <ColumnHeader>Skills</ColumnHeader>
         <DetailsWrapper>

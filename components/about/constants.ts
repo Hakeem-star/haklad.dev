@@ -85,33 +85,33 @@ export const skillData = [
       },
     ],
   },
-  {
-    title: "AD TECH",
-    items: [
-      {
-        img: "",
-        text: "GTM",
-      },
-      {
-        img: "",
-        text: "DCM",
-      },
-      {
-        img: "",
-        text: "DV360",
-      },
-      {
-        img: "",
-        text: "FlashTalking",
-      },
-      {
-        img: "",
-        text: "Tealium",
-      },
-      {
-        img: "",
-        text: "Google Analytics",
-      },
-    ],
-  },
+  // {
+  //   title: "AD TECH",
+  //   items: [
+  //     {
+  //       img: "",
+  //       text: "GTM",
+  //     },
+  //     {
+  //       img: "",
+  //       text: "DCM",
+  //     },
+  //     {
+  //       img: "",
+  //       text: "DV360",
+  //     },
+  //     {
+  //       img: "",
+  //       text: "FlashTalking",
+  //     },
+  //     {
+  //       img: "",
+  //       text: "Tealium",
+  //     },
+  //     {
+  //       img: "",
+  //       text: "Google Analytics",
+  //     },
+  //   ],
+  // },
 ];

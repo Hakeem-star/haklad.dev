@@ -8,31 +8,76 @@ import LevelDetails from "../components/about/LevelDetails";
 import { CloseIcon } from "../components/about/CloseIcon";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { device } from "constants/breakpoints";
+import { colors } from "constants/colors";
+
+const OutboundLinks = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-inline: 10px;
+  align-self: start;
+
+  color: ${colors.witcher_text_faded};
+
+  a:hover {
+    color: white;
+  }
+
+  @media ${device.desktop} {
+    display: none;
+  }
+`;
 
 const Header = styled.div`
   display: flex;
-  align-items: center;
   width: 100%;
-  margin-top: 70px;
-  margin-bottom: 60px;
-  padding: 0 1rem;
+  margin-top: 20px;
+  margin-bottom: 40px;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .closeIconWrapper {
+    display: none;
+  }
+
+  @media ${device.desktop} {
+    flex-direction: row;
+    align-items: center;
+    margin-top: 70px;
+    margin-bottom: 60px;
+    padding: 0 1rem;
+
+    .closeIconWrapper {
+      display: block;
+    }
+
+    .levelDetailsWrapper {
+      margin-left: auto;
+    }
+  }
 `;
 
 const Name = styled.h2`
   width: fit-content;
   align-self: flex-start;
   margin-top: 0.55rem;
+  cursor: pointer;
 `;
 
 const Wrapper = styled.div`
   font-family: PT Sans Regular;
-  padding: 0 5em;
 
-  width: 100vw;
-  height: 100vh;
+  padding: 0 2vw;
 
   display: flex;
   flex-direction: column;
+
+  @media ${device.desktop} {
+    padding: 0 10px;
+  }
 `;
 
 // design to look like witcher beastiary page
@@ -42,8 +87,36 @@ const Columns = styled.div`
   flex-grow: 1;
   max-height: 80%;
   display: grid;
-  grid-template-columns: repeat(3, 3fr);
-  grid-template-rows: 100%;
+
+  .middleColumn {
+    display: none;
+  }
+
+  .fancy-border-wrapper {
+    height: 100%;
+  }
+
+  .leftColumn {
+    margin-bottom: 50px;
+  }
+
+  @media ${device.desktop} {
+    padding: 0 10px;
+    grid-template-columns: repeat(3, 3fr);
+    grid-template-rows: 100%;
+
+    .leftColumn {
+      margin-bottom: 0px;
+    }
+
+    .middleColumn {
+      display: block;
+    }
+
+    .fancy-border-wrapper {
+      height: 70%;
+    }
+  }
 `;
 
 type Props = {};
@@ -62,19 +135,42 @@ const About = ({}: Props) => {
   return (
     <Wrapper>
       <Header>
-        <Name>Hakeem Ladejobi</Name>
+        <Link href="/" passHref>
+          <a>
+            <Name>Hakeem Ladejobi</Name>
+          </a>
+        </Link>
         {/* Include nav to go back home or maybe navigate to experiments page */}
         {/* TODO make this value dynamic based on year */}
-        <LevelDetails />
-        {/* <Link href="/" passHref>
-          <a> */}
-        <CloseIcon
-          onClick={() => {
-            router.push("/");
-          }}
-        />
-        {/* </a>
-        </Link> */}
+        <div className="levelDetailsWrapper">
+          <LevelDetails />
+        </div>
+
+        <OutboundLinks>
+          <p>Why don&apos;t you also check out my -</p>
+          <Link href="/experiments">- Experiments</Link>
+          <a
+            href="https://github.com/Hakeem-star"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            - Github
+          </a>
+          <a
+            href="https://github.com/Hakeem-star"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            - LinkedIn
+          </a>
+        </OutboundLinks>
+        <div className="closeIconWrapper">
+          <CloseIcon
+            onClick={() => {
+              router.push("/");
+            }}
+          />
+        </div>
       </Header>
       <Columns>
         <LeftColumn />

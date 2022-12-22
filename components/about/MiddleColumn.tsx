@@ -18,6 +18,12 @@ import {
 import Link from "next/link";
 import HoveredItem from "./HoveredItem";
 
+const ImageCover = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+`;
+
 type Props = {};
 enum HoveredItemText {
   WORK = "Work",
@@ -33,19 +39,22 @@ const MiddleColumn = (props: Props) => {
   };
 
   return (
-    <ColumnWrapper>
+    <ColumnWrapper className="middleColumn">
       <Wrapper>
         {/* Add three js canvas that allows you to change lighting on a still image
         using the normal maps
         Find product that does this */}
 
         <ImageArea>
-          <Image
-            src="/icons/traffic-cone.png"
-            alt="Picture of the author"
-            width={500}
-            height={500}
-          />
+          <ImageCover>
+            <Image
+              src="/icons/traffic-cone.png"
+              alt="Picture of the author"
+              layout="fill"
+              objectFit="contain"
+            />
+          </ImageCover>
+
           <p style={{ padding: 5 }}>Coming soon</p>
         </ImageArea>
         <OutboundWrapper>
@@ -66,7 +75,11 @@ const MiddleColumn = (props: Props) => {
                 </ImageWrapper>
               </OutboundItem>
             </Link>
-            <Link href="/experiments">
+            <a
+              href="https://github.com/Hakeem-star"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <OutboundItem
                 onClick={() => {}}
                 onMouseEnter={() => {
@@ -89,8 +102,12 @@ const MiddleColumn = (props: Props) => {
                   />
                 </ImageWrapper>
               </OutboundItem>
-            </Link>
-            <Link href="/experiments">
+            </a>
+            <a
+              href="https://www.linkedin.com/in/hakeem-ladejobi-722842102/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <OutboundItem
                 onClick={() => {}}
                 onMouseEnter={() => {
@@ -107,13 +124,10 @@ const MiddleColumn = (props: Props) => {
                   <Linkedin color={colors.witcher_text_gold} />
                 </ImageWrapper>
               </OutboundItem>
-            </Link>
+            </a>
           </Outbound>
-          {
-            // hoveredItem
 
-            true && <HoveredItem text={hoveredItem} />
-          }
+          <HoveredItem text={hoveredItem} />
         </OutboundWrapper>
       </Wrapper>
     </ColumnWrapper>

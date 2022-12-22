@@ -50,7 +50,7 @@ type Props = {};
 
 export const RightColumn = (props: Props) => {
   return (
-    <ColumnWrapper>
+    <ColumnWrapper className="rightColumn">
       <FancyBorderWrapper>
         <ColumnHeader style={{ marginBottom: 10 }}>Experience</ColumnHeader>
         <Info>

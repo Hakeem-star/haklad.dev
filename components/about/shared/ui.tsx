@@ -50,9 +50,9 @@ export const squareCornerBorderSVG = (color: string, fill?: boolean) =>
 </svg>`
   );
 
-export const FancyBorderWrapper = styled.div`
-  height: 70%;
-
+export const FancyBorderWrapper = styled.div.attrs({
+  className: "fancy-border-wrapper",
+})`
   display: flex;
   flex-direction: column;
 
