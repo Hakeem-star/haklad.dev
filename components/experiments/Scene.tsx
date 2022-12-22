@@ -12,10 +12,14 @@ import River from "./River";
 import { cameraDefaultPosition } from "./constants";
 import useMousePosition from "hooks/useMousePosition";
 import { useControls } from "leva";
+import { useWindowSize } from "hooks/useWindowSize";
+import { sizes } from "constants/breakpoints";
 
 function Scene() {
   const { camera } = useThree();
+  const { width: windowWidth } = useWindowSize();
 
+  const isMobile = windowWidth && windowWidth <= parseInt(sizes.tablet);
   const light = useRef<DirectionalLight>(null);
   const controlsRef = useRef<MapControlsImpl>(null);
 
@@ -28,6 +32,13 @@ function Scene() {
   });
 
   useFrame((state) => {
+    if (isMobile) {
+      camera.position.x = 1.89;
+      camera.position.y = 0.5;
+      camera.position.z = 8.73;
+      return;
+    }
+
     /* For whatever reason, state.mouse would not give me the mouse position
  when I was hovered over a html element */
 
@@ -38,6 +49,7 @@ function Scene() {
     const camZ = mapLinear(yPos, 0, 1, -0.04, 0.02);
 
     const controls = controlsRef.current;
+
     if (!controls || !disableManualCamera) return;
 
     // ease the movement of the camera

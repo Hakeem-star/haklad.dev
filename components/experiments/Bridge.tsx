@@ -9,7 +9,7 @@ import { useGLTF } from "@react-three/drei";
 import { GroupProps } from "@react-three/fiber";
 
 export function Bridge(props: GroupProps) {
-  const { nodes, materials } = useGLTF("/models/Golden Gate.glb");
+  const { nodes, materials } = useGLTF("/models/Golden_Gate.glb");
   return (
     <group {...props} dispose={null}>
       <mesh

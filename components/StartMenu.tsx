@@ -99,11 +99,6 @@ const StartMenu = ({ handleLinkHover, className }: Props) => {
             <StyledLink onMouseEnter={handleLinkHover}>Experiments</StyledLink>
           </Link>
         </li>
-        <li>
-          <Link style={{ color: "white" }} href="/contact" passHref>
-            <StyledLink onMouseEnter={handleLinkHover}>Get in touch</StyledLink>
-          </Link>
-        </li>
       </StyledUL>
     </nav>
   );
