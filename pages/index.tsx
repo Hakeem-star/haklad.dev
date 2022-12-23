@@ -106,7 +106,92 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
+      <main
+        className={styles.main}
+        style={{
+          filter: `url(#main-page-filter)`,
+          backgroundImage: `url(https://i.pinimg.com/474x/a7/e8/89/a7e889effe08ecbede2ddaafbecdbd66.jpg)`,
+        }}
+      >
+        <svg
+          style={{
+            width: "100vw",
+            height: "100vh",
+            position: "fixed",
+            pointerEvents: "none",
+          }}
+        >
+          <defs>
+            <radialGradient id="hole">
+              <stop offset="19%" stopColor="#ffffff" />
+              <stop offset="31%" stopColor="#ffffff" />
+              <stop offset="34%" stopColor="#353535" />
+              <stop offset="100%" stopColor="#000000" />
+            </radialGradient>
+
+            <filter
+              id="main-page-filter"
+              x="-20%"
+              y="-20%"
+              width="140%"
+              height="140%"
+              filterUnits="objectBoundingBox"
+              primitiveUnits="userSpaceOnUse"
+              colorInterpolationFilters="sRGB"
+            >
+              <feTurbulence
+                type="turbulence"
+                baseFrequency="0.045 0.13"
+                numOctaves="11"
+                seed="2"
+                stitchTiles="stitch"
+                x="0%"
+                y="0%"
+                width="100%"
+                height="100%"
+                result="turbulence"
+              />
+              <feDisplacementMap
+                in="SourceGraphic"
+                in2="turbulence"
+                scale="20"
+                xChannelSelector="R"
+                yChannelSelector="B"
+                x="0%"
+                y="0%"
+                width="100%"
+                height="100%"
+                result="displacementMap"
+              />
+              <feMorphology
+                operator="erode"
+                radius="0 3"
+                x="0%"
+                y="0%"
+                width="100%"
+                height="100%"
+                in="displacementMap"
+                result="morphology"
+              />
+              <feImage
+                id="feimage"
+                xlinkHref="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjEwMCUiIHdpZHRoPSIxMDAlIj4KICA8ZGVmcz4KICAgIDxyYWRpYWxHcmFkaWVudCBpZD0iMCIgZ3JhZGllbnRUcmFuc2Zvcm09InRyYW5zbGF0ZSgtMC4wNCAwKSBzY2FsZSgxLCAxKSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMTklIiBzdG9wLWNvbG9yPSIjZjdmYWZjIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMzElIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMzQlIiBzdG9wLWNvbG9yPSIjMzUzNTM1Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIvPgogICAgPC9yYWRpYWxHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3QgZmlsbD0idXJsKCMwKSIgaGVpZ2h0PSIxMDAlIiB3aWR0aD0iMTAwJSIvPgo8L3N2Zz4K"
+                x="50%"
+                y="50%"
+                width="100%"
+                height="100%"
+                result="mask"
+              />
+
+              <feComposite
+                operator="out"
+                in="morphology"
+                in2="mask"
+                result="photomask"
+              />
+            </filter>
+          </defs>
+        </svg>
         <VolumeContainer
           onClick={() => {
             setMuted((v) => {
