@@ -8,6 +8,8 @@ import {
 import styled from "styled-components";
 import Scene from "./Scene";
 import { cameraDefaultPosition } from "./constants";
+import { useWindowSize } from "hooks/useWindowSize";
+import { sizes } from "constants/breakpoints";
 
 const Wrapper = styled.div`
   position: absolute;
@@ -19,6 +21,9 @@ const Wrapper = styled.div`
 type Props = {};
 
 const Canvas = (props: Props) => {
+  const { width: windowWidth } = useWindowSize();
+
+  const isMobile = windowWidth && windowWidth <= parseInt(sizes.tablet);
   return (
     <Wrapper>
       <ThreeCanvas
@@ -28,15 +33,19 @@ const Canvas = (props: Props) => {
         }}
       >
         <Scene />
-        <EffectComposer>
-          <DepthOfField
-            focusDistance={0.25}
-            focalLength={0.6}
-            bokehScale={1.3}
-          />
-          <Noise opacity={0.02} />
-          <Vignette eskil={false} offset={0.1} darkness={0.3} />
-        </EffectComposer>
+        {/* Getting this error when enabled on mobile -
+         [.WebGL-0xe24da400]GL ERROR :GL_INVALID_FRAMEBUFFER_OPERATION : glDrawArrays: framebuffer incomplete */}
+        {!isMobile && (
+          <EffectComposer>
+            <DepthOfField
+              focusDistance={0.25}
+              focalLength={0.6}
+              bokehScale={1.3}
+            />
+            <Noise opacity={0.02} />
+            <Vignette eskil={false} offset={0.1} darkness={0.3} />
+          </EffectComposer>
+        )}
       </ThreeCanvas>
     </Wrapper>
   );
