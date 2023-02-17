@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { colors } from "../../../constants";
 import { ColumnHeader, squareCornerBorderSVG } from "../shared/ui";
-import { getAge, getDaysToNextBday } from "./utils";
+import { getAge, getDaysToNextBDay } from "./utils";
 
 const LevelDetails = styled.div`
   display: flex;
@@ -47,9 +47,11 @@ const LevelBar = styled(ColumnHeader)`
     width: calc(
       ${() => {
           const daysInYear = 365;
-          const daysToNextBday = getDaysToNextBday();
+          const daysToNextBday = getDaysToNextBDay();
 
-          return ((daysToNextBday / daysInYear) * 100).toFixed() + "%";
+          return (
+            (((daysInYear - daysToNextBday) / daysInYear) * 100).toFixed() + "%"
+          );
         }} - 11px
     );
     height: calc(100% - 11px);
@@ -80,7 +82,7 @@ const LevelLabel = styled.h2`
 type Props = {};
 const index = (props: Props) => {
   const age = getAge();
-  const daysToNextBday = getDaysToNextBday();
+  const daysToNextBday = getDaysToNextBDay();
 
   return (
     <LevelDetails>

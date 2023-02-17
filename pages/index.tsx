@@ -108,12 +108,12 @@ const Home: NextPage = () => {
 
       <main
         className={styles.main}
-        style={{
-          filter: `url(#main-page-filter)`,
-          backgroundImage: `url(https://i.pinimg.com/474x/a7/e8/89/a7e889effe08ecbede2ddaafbecdbd66.jpg)`,
-        }}
+        // style={{
+        //   filter: `url(#main-page-filter)`,
+        //   backgroundImage: `url(https://i.pinimg.com/474x/a7/e8/89/a7e889effe08ecbede2ddaafbecdbd66.jpg)`,
+        // }}
       >
-        <svg
+        {/* <svg
           style={{
             width: "100vw",
             height: "100vh",
@@ -191,7 +191,7 @@ const Home: NextPage = () => {
               />
             </filter>
           </defs>
-        </svg>
+        </svg> */}
         <VolumeContainer
           onClick={() => {
             setMuted((v) => {

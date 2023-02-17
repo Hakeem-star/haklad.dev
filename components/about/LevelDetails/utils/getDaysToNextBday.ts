@@ -1,12 +1,37 @@
-export function getDaysToNextBday() {
+export function getDaysToNextBDay() {
   const now = new Date();
-  const next = new Date(now.getFullYear() + 1, 3, 29);
+  const next = getNextBirthday();
 
-  return getDateRange(now, next);
+  let diff = next.getTime() - now.getTime();
+
+  return timestampToDays(diff);
 }
 
-export function getDateRange(date1: Date, date2: Date) {
-  let diff = Math.abs(date1.getTime() - date2.getTime());
-  const days = Math.ceil(diff / (1000 * 3600 * 24));
+function timestampToDays(timestamp: number) {
+  const millisecondsPerDay = 1000 * 60 * 60 * 24;
+  const days = Math.floor(timestamp / millisecondsPerDay);
   return days;
+}
+
+function getNextBirthday() {
+  // Create new Date objects for the current date and the date of birth
+  const today = new Date();
+  const dob = new Date(1990, 3, 29);
+
+  // Get the year of the next birthday
+  let nextBirthdayYear = today.getFullYear();
+  if (
+    today.getMonth() > dob.getMonth() ||
+    (today.getMonth() === dob.getMonth() && today.getDate() > dob.getDate())
+  ) {
+    nextBirthdayYear++;
+  }
+
+  // Create a new Date object for the next birthday and return it
+  const nextBirthday = new Date(
+    nextBirthdayYear,
+    dob.getMonth(),
+    dob.getDate()
+  );
+  return nextBirthday;
 }
