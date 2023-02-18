@@ -45,7 +45,7 @@ const Header = styled.div`
 
   @media ${device.desktop} {
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     margin-top: 70px;
     margin-bottom: 60px;
     padding: 0 1rem;
@@ -63,7 +63,7 @@ const Header = styled.div`
 const Name = styled.h2`
   width: fit-content;
   align-self: flex-start;
-  margin-top: 0.55rem;
+  /* margin-top: 0.55rem; */
   cursor: pointer;
 `;
 
@@ -77,6 +77,8 @@ const Wrapper = styled.div`
 
   @media ${device.desktop} {
     padding: 0 10px;
+    height: 100%;
+    overflow: hidden;
   }
 `;
 

@@ -20,6 +20,7 @@ const LevelWrapper = styled.div`
   display: flex;
   align-items: baseline;
   gap: 10px;
+  margin-top: -6px;
 `;
 
 const LevelProgress = styled.div``;
@@ -73,7 +74,7 @@ const Level = styled.h2`
 const LevelLabel = styled.h2`
   margin-bottom: auto;
   margin-right: 30px;
-  margin-top: 4px;
+  /* margin-top: 4px; */
 
   font-size: 1.2rem;
   color: ${colors.witcher_text_faded};
