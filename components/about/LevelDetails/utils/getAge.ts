@@ -1,7 +1,14 @@
-import { diff_years } from "./diff_years";
+export function getAge(dateOfBirth: string = "1990-04-29") {
+  const dob = new Date(dateOfBirth);
+  const today = new Date();
 
-export function getAge() {
-  const bday = new Date(1990, 3, 29);
-  const age = diff_years(new Date(), bday);
+  let age = today.getFullYear() - dob.getFullYear();
+
+  // Check if the birthday has passed this year, if not subtract one from the age
+  const monthDiff = today.getMonth() - dob.getMonth();
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+    age--;
+  }
+
   return age;
 }
