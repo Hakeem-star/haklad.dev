@@ -1,22 +1,24 @@
-export function getDaysToNextBDay() {
-  const now = new Date();
-  const next = getNextBirthday();
+export function getDaysToNextBDay(
+  now: Date = new Date(),
+  dob: Date = new Date(1990, 3, 29)
+) {
+  const next = getNextBirthday(dob);
 
   let diff = next.getTime() - now.getTime();
 
   return timestampToDays(diff);
 }
 
-function timestampToDays(timestamp: number) {
+export function timestampToDays(timestamp: number) {
   const millisecondsPerDay = 1000 * 60 * 60 * 24;
   const days = Math.floor(timestamp / millisecondsPerDay);
   return days;
 }
 
-function getNextBirthday() {
+function getNextBirthday(dob: Date = new Date(1990, 3, 29)) {
   // Create new Date objects for the current date and the date of birth
   const today = new Date();
-  const dob = new Date(1990, 3, 29);
+  // const dob = new Date(1990, 3, 29);
 
   // Get the year of the next birthday
   let nextBirthdayYear = today.getFullYear();
