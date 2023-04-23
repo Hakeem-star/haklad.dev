@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { ColumnWrapper } from "./shared";
 import styled from "styled-components";
 import { ColumnHeader, FancyBorderWrapper } from "./shared/ui";
 import { colors } from "../../constants";
+import { useScrollEnd } from "../../hooks/useScrollEnd";
 
 const Intro = styled.p`
   margin-bottom: 20px;
@@ -34,26 +35,16 @@ const Info = styled.div`
   }
 `;
 
-const Divider = styled.span`
-  width: 100%;
-  height: 3px;
-  border-top: 1px solid white;
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 70%;
-`;
-
 type Props = {};
 
 export const RightColumn = (props: Props) => {
+  const { ref, scrollEnded } = useScrollEnd();
+
   return (
     <ColumnWrapper className="rightColumn">
-      <FancyBorderWrapper>
+      <FancyBorderWrapper showFadedBottom={!scrollEnded}>
         <ColumnHeader style={{ marginBottom: 10 }}>Experience</ColumnHeader>
-        <Info>
+        <Info ref={ref}>
           <Intro>
             I have extensive knowledge of various aspects of web development and
             am constantly seeking to learn and enhance my skills. I held

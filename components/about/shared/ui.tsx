@@ -52,7 +52,7 @@ export const squareCornerBorderSVG = (color: string, fill?: boolean) =>
 
 export const FancyBorderWrapper = styled.div.attrs({
   className: "fancy-border-wrapper",
-})`
+})<{ showFadedBottom?: boolean }>`
   display: flex;
   flex-direction: column;
 
@@ -67,6 +67,20 @@ export const FancyBorderWrapper = styled.div.attrs({
   border-image-slice: 30%;
 
   position: relative;
+
+  :after {
+    content: "";
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: linear-gradient(to bottom, transparent 80%, black);
+    opacity: ${({ showFadedBottom }) => (showFadedBottom ? 1 : 0)};
+    transition: opacity 0.2s;
+    pointer-events: none;
+  }
 
   :before {
     content: "";

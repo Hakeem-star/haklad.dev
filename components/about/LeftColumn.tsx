@@ -1,4 +1,4 @@
-import { skillData } from "./constants";
+import { useScrollEnd } from "../../hooks/useScrollEnd";
 import {
   Details,
   DetailsItem,
@@ -9,17 +9,20 @@ import {
   Summary,
   SummaryContent,
 } from "./LeftColumn.style";
+import { skillData } from "./constants";
 import { ColumnWrapper } from "./shared";
 import { ColumnHeader, FancyBorderWrapper } from "./shared/ui";
 
 type Props = {};
 
 export const LeftColumn = (props: Props) => {
+  const { ref, scrollEnded } = useScrollEnd();
+
   return (
     <ColumnWrapper className="leftColumn">
-      <FancyBorderWrapper>
+      <FancyBorderWrapper showFadedBottom={!scrollEnded}>
         <ColumnHeader>Skills</ColumnHeader>
-        <DetailsWrapper>
+        <DetailsWrapper ref={ref}>
           {skillData.map((data, idx) => {
             return (
               <Details open={!idx} key={idx}>
