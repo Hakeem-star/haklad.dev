@@ -1,5 +1,9 @@
 import { gsap } from "gsap";
-import type { NextPage } from "next";
+import type {
+  GetServerSideProps,
+  InferGetServerSidePropsType,
+  NextPage,
+} from "next";
 import Head from "next/head";
 import { useCallback, useEffect, useRef, useState } from "react";
 import styled, { keyframes } from "styled-components";
@@ -7,6 +11,7 @@ import StartMenu from "../components/StartMenu";
 import styles from "../styles/Home.module.css";
 import VolumeMute from "./assets/VolumeMute.svg";
 import VolumeUnMute from "./assets/VolumeUnMute.svg";
+import { useRouter } from "next/router";
 
 const flash = keyframes`
   to {
@@ -50,7 +55,9 @@ const H1 = styled.h1`
   }
 `;
 
-const Home: NextPage = () => {
+const Home = ({
+  navFromInternalPage,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const audioRef = useRef<null | HTMLAudioElement>(null);
   const [muted, setMuted] = useState(false);
   const [started, setStarted] = useState(false);
@@ -72,14 +79,14 @@ const Home: NextPage = () => {
   const nameRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (started) {
+    if (!navFromInternalPage && started) {
       gsap.to(nameRef.current, {
         y: "-40%",
         ease: "power4.easeIn",
         duration: 0.3,
       });
     }
-  }, [started]);
+  }, [navFromInternalPage, started]);
 
   return (
     <div className={styles.container}>
@@ -115,12 +122,10 @@ const Home: NextPage = () => {
 
         <GradientOverlay />
         <div style={{ position: "relative", padding: 20 }} ref={nameRef}>
-          {/* TODO - After clicking start, this should animate up and the items can stagger in */}
           <H1 className={styles.title}>Hakeem Ladejobi</H1>
         </div>
-        {/* TODO - use context to preserve the state, so when people return, 
-        they won't need to do this again */}
-        {!started ? (
+
+        {!navFromInternalPage && !started ? (
           <StartButton
             onClick={() => {
               setStarted(true);
@@ -143,3 +148,24 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export const getServerSideProps: GetServerSideProps<{
+  navFromInternalPage: boolean;
+}> = async (context) => {
+  const referer = context.req.headers.referer;
+  const referrerDomain = referer?.split("/")[2];
+  const currentDomain = context.req.headers.host;
+  const url = context.resolvedUrl;
+  const refererPath = referer?.split("/")[3] || "/";
+  const notSamePage = refererPath !== url;
+
+  const sameDomain = referrerDomain === currentDomain;
+
+  const navFromInternalPage = referer && sameDomain && notSamePage;
+
+  return {
+    props: {
+      navFromInternalPage: Boolean(navFromInternalPage),
+    },
+  };
+};
