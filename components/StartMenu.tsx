@@ -1,40 +1,34 @@
 import Link from "next/link";
-import React from "react";
-import styled from "styled-components";
+import { useCallback, useEffect, useState } from "react";
+import styled, { css } from "styled-components";
 
-const StartButton = styled.h2`
-  cursor: pointer;
-`;
-
-const VolumeContainer = styled.div`
-  cursor: pointer;
-  position: absolute;
-  bottom: 25px;
-  right: 25px;
-`;
-
-const StyledLink = styled.a`
+const StyledLink = styled.a<{
+  active?: boolean;
+}>`
   color: white;
   cursor: pointer;
   width: 100%;
   position: relative;
 
-  &:hover {
-    text-decoration: underline;
-    color: red;
+  ${({ active }) => {
+    if (!active) return;
+    return css`
+      text-decoration: underline;
+      color: red;
 
-    :after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      // 50px = hand cursor width
-      left: -60px;
-      top: 6px;
-      background: url("./FF7Cursor.webp") no-repeat;
-      background-size: contain;
-      width: 50px;
-    }
-  }
+      :after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        // 50px = hand cursor width
+        left: -60px;
+        top: 6px;
+        background: url("./FF7Cursor.webp") no-repeat;
+        background-size: contain;
+        width: 50px;
+      }
+    `;
+  }}
 `;
 
 const StyledUL = styled.ul`
@@ -52,35 +46,75 @@ const StyledUL = styled.ul`
   }
 `;
 
-const GradientOverlay = styled.div`
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(transparent, black), transparent;
-`;
-
-const H1 = styled.h1`
-  user-select: none;
-  position: relative;
-  color: white;
-  &::after {
-    content: "";
-  }
-`;
-
 type Props = {
   className?: string;
   handleLinkHover: () => void;
 };
 
+const items = ["About me", "Anime Site", "Experiments"];
 const StartMenu = ({ handleLinkHover, className }: Props) => {
+  const [activeItem, setActiveItem] = useState("");
+
+  const handleActiveLink = useCallback(
+    (item: string) => {
+      return () => {
+        setActiveItem(item);
+        handleLinkHover();
+      };
+    },
+    [handleLinkHover]
+  );
+
+  const handleKeyPress = useCallback(
+    (event: KeyboardEvent) => {
+      const currentActiveItem = items.indexOf(activeItem);
+
+      if (event.key === "ArrowDown") {
+        if (!activeItem) {
+          handleActiveLink(items[0])();
+        }
+
+        if (currentActiveItem === items.length - 1) {
+          handleActiveLink(items[0])();
+        } else {
+          handleActiveLink(items[currentActiveItem + 1])();
+        }
+      }
+
+      if (event.key === "ArrowUp") {
+        if (!activeItem) {
+          handleActiveLink(items[items.length - 1])();
+        }
+
+        if (currentActiveItem === 0) {
+          handleActiveLink(items[items.length - 1])();
+        } else {
+          handleActiveLink(items[currentActiveItem - 1])();
+        }
+      }
+    },
+    [activeItem, handleActiveLink]
+  );
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyPress);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [handleKeyPress]);
+
   return (
     <nav className={className}>
       <StyledUL>
         <li>
           <Link href="/about" passHref>
-            <StyledLink onMouseEnter={handleLinkHover}>About me</StyledLink>
+            <StyledLink
+              active={activeItem === "About me"}
+              onMouseEnter={handleActiveLink("About me")}
+            >
+              About me
+            </StyledLink>
           </Link>
         </li>
         <li>
@@ -89,14 +123,23 @@ const StartMenu = ({ handleLinkHover, className }: Props) => {
             href="https://anime-site-hakeem.vercel.app/"
             passHref
           >
-            <StyledLink onMouseEnter={handleLinkHover} target="_blank">
+            <StyledLink
+              active={activeItem === "Anime Site"}
+              onMouseEnter={handleActiveLink("Anime Site")}
+              target="_blank"
+            >
               Anime Site
             </StyledLink>
           </Link>
         </li>
         <li>
           <Link style={{ color: "white" }} href="/experiments" passHref>
-            <StyledLink onMouseEnter={handleLinkHover}>Experiments</StyledLink>
+            <StyledLink
+              active={activeItem === "Experiments"}
+              onMouseEnter={handleActiveLink("Experiments")}
+            >
+              Experiments
+            </StyledLink>
           </Link>
         </li>
       </StyledUL>
