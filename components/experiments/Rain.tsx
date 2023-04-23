@@ -53,14 +53,14 @@ const Rain = (props: Props) => {
     rainMaterialRef.current.uTime = clock.getElapsedTime();
   });
 
-  const { uAngle } = useControls({
-    uAngle: {
-      min: 0.0,
-      max: 360.0,
-      value: 0.0,
-      step: 0.1,
-    },
-  });
+  // const { uAngle } = useControls({
+  //   uAngle: {
+  //     min: 0.0,
+  //     max: 360.0,
+  //     value: 0.0,
+  //     step: 0.1,
+  //   },
+  // });
 
   return (
     <>
@@ -74,7 +74,7 @@ const Rain = (props: Props) => {
         <rainMaterial
           ref={rainMaterialRef}
           key={RainMaterial.key}
-          uAngle={uAngle}
+          // uAngle={uAngle}
           transparent
           alphaTest={0.001}
           depthWrite={false}

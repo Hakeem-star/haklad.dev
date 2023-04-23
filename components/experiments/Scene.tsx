@@ -27,9 +27,9 @@ function Scene() {
     options: { centerOrigin: true, normalise: true },
   });
 
-  const { disableManualCamera } = useControls({
-    disableManualCamera: true,
-  });
+  // const { disableManualCamera } = useControls({
+  //   disableManualCamera: true,
+  // });
 
   useFrame((state) => {
     if (isMobile) {
@@ -50,7 +50,11 @@ function Scene() {
 
     const controls = controlsRef.current;
 
-    if (!controls || !disableManualCamera) return;
+    if (
+      !controls
+      // || !disableManualCamera
+    )
+      return;
 
     // ease the movement of the camera
     controls.target.x = lerp(controls.target.x, camX, 0.1);
@@ -72,7 +76,7 @@ function Scene() {
         dampingFactor={0.05}
         ref={controlsRef}
         // Disables the ability to move the camera
-        enabled={!disableManualCamera}
+        // enabled={!disableManualCamera}
       />
       <fog attach="fog" args={["#85858a", 0.1, 10]} />
       <pointLight position={[0, -5, -10]} intensity={100.0} />
