@@ -108,6 +108,9 @@ const Home: NextPage = () => {
 
       <main
         className={styles.main}
+        style={{
+          minHeight: "100vh",
+        }}
         // style={{
         //   filter: `url(#main-page-filter)`,
         //   backgroundImage: `url(https://i.pinimg.com/474x/a7/e8/89/a7e889effe08ecbede2ddaafbecdbd66.jpg)`,

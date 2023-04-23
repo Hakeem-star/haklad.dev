@@ -12,37 +12,6 @@ import {
 import { ColumnWrapper } from "./shared";
 import { ColumnHeader, FancyBorderWrapper } from "./shared/ui";
 
-/* clip-path: polygon(
-    50% 0%,
-    98.75% 0%,
-    98.75% 1.25%,
-    100% 1.25%,
-    100% 98.75%,
-    98.75% 98.75%,
-    98.75% 100%,
-    1.25% 100%,
-    1.25% 98.75%,
-    0% 98.75%,
-    0% 1.25%,
-    1.25% 1.5%,
-    1.25% 0%,
-    50% 0%,
-    50% 0.25%,
-    1.5% 0.25%,
-    1.5% 1.5%,
-    0.25% 1.5%,
-    0.25% 98.5%,
-    1.5% 98.5%,
-    1.5% 99.75%,
-    98.5% 99.75%,
-    98.5% 98.5%,
-    99.75% 98.5%,
-    99.75% 1.5%,
-    98.5% 1.5%,
-    98.5% 0.25%,
-    50% 0.25%
-  ); */
-
 type Props = {};
 
 export const LeftColumn = (props: Props) => {
@@ -53,9 +22,7 @@ export const LeftColumn = (props: Props) => {
         <DetailsWrapper>
           {skillData.map((data, idx) => {
             return (
-              // TODO - Only open one dropdown at once
-              <Details key={idx}>
-                {/* TODO - Add stars to these that go away once expanded, to simulate, new item */}
+              <Details open={!idx} key={idx}>
                 <Summary>
                   <SummaryContent>{data.title}</SummaryContent>
                 </Summary>

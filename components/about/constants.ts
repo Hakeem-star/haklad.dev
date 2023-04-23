@@ -28,6 +28,10 @@ export const skillData = [
       },
       {
         img: "",
+        text: "Next.js",
+      },
+      {
+        img: "",
         text: "React Native",
       },
       {
@@ -40,7 +44,7 @@ export const skillData = [
       },
       {
         img: "",
-        text: "Greensock",
+        text: "Greensock (GSAP)",
       },
       {
         img: "",
@@ -48,43 +52,47 @@ export const skillData = [
       },
       {
         img: "",
+        text: "Tailwind CSS",
+      },
+      {
+        img: "",
         text: "GraphQL",
       },
       {
         img: "",
-        text: "Prisma (ORM)",
+        text: "Prisma",
       },
       {
         img: "",
-        text: "Headless CMS (Sanity)",
+        text: "Sanity - Headless CMS",
       },
     ],
   },
-  {
-    title: "VFX",
-    items: [
-      {
-        img: "",
-        text: "Blender",
-      },
-      {
-        img: "",
-        text: "Photoshop",
-      },
-      {
-        img: "",
-        text: "Premiere",
-      },
-      {
-        img: "",
-        text: "After Effects",
-      },
-      {
-        img: "",
-        text: "Maya",
-      },
-    ],
-  },
+  // {
+  //   title: "VFX",
+  //   items: [
+  //     {
+  //       img: "",
+  //       text: "Blender",
+  //     },
+  //     {
+  //       img: "",
+  //       text: "Photoshop",
+  //     },
+  //     {
+  //       img: "",
+  //       text: "Premiere",
+  //     },
+  //     {
+  //       img: "",
+  //       text: "After Effects",
+  //     },
+  //     {
+  //       img: "",
+  //       text: "Maya",
+  //     },
+  //   ],
+  // },
   // {
   //   title: "AD TECH",
   //   items: [

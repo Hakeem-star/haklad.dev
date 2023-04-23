@@ -8,10 +8,7 @@ const Wrapper = styled(WitcherStyle4CornerContainer)`
   width: 40px;
   height: 40px;
 
-  transform: translateX(40%);
-
   align-self: start;
-  /* margin-top: 5px; */
 
   font-size: 22px;
   color: ${colors.witcher_text_faded};

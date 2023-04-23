@@ -48,8 +48,8 @@ const Header = styled.div`
     align-items: flex-start;
     margin-top: 70px;
     margin-bottom: 60px;
-    padding: 0 1rem;
-
+    padding: 0 20px;
+    gap: 30px;
     .closeIconWrapper {
       display: block;
     }
@@ -100,6 +100,7 @@ const Columns = styled.div`
 
   .leftColumn {
     margin-bottom: 50px;
+    height: 370px;
   }
 
   @media ${device.desktop} {
@@ -109,6 +110,7 @@ const Columns = styled.div`
 
     .leftColumn {
       margin-bottom: 0px;
+      height: auto;
     }
 
     .middleColumn {

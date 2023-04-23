@@ -8,7 +8,7 @@ const Intro = styled.p`
   margin-bottom: 20px;
 `;
 
-const JobDetail = styled.p`
+const JobDetail = styled.ul`
   width: calc(100% - 5rem);
   margin-left: 2rem;
   margin-bottom: 30px;
@@ -55,22 +55,43 @@ export const RightColumn = (props: Props) => {
         <ColumnHeader style={{ marginBottom: 10 }}>Experience</ColumnHeader>
         <Info>
           <Intro>
-            Experienced in many aspects of the web and always trying to learn
-            and improve. Worked several technical roles in the digital
-            advertising sector over a period of 5 years. Self-taught JavaScript
-            developer with a combination of skills that allow the development of
-            creative solutions for clients and internal teams.
+            I have extensive knowledge of various aspects of web development and
+            am constantly seeking to learn and enhance my skills. I held
+            multiple technical roles within the digital advertising sector for
+            over 5 years before transitioning to web development as a
+            self-taught JavaScript developer. I possess a unique combination of
+            skills that enable me to create innovative solutions for both
+            clients and internal teams.
           </Intro>
           <div>
             <Job>
               NeverBland / FullStack JavaScript Developer London – January 2021
-              – Now
+              – Present
             </Job>
             <JobDetail>
-              Building data-rich web apps using React, Typescript, Prisma &amp;
-              GraphQL. Collaborating with the Client, Designers, Product
-              Managers, and other Engineers to deliver compelling user-facing
-              products.
+              <li>
+                Working as part of a small team of under 10 developers, I had
+                the opportunity to work across a wide range of web applications,
+                including large-scale data aggregation apps for the medical
+                industry and smaller games for Christmas.
+              </li>
+              <li>
+                Utilized modern technologies such as React, TypeScript, Prisma,
+                Framer, GraphQL, NX, and Konva to build high-quality
+                applications.
+              </li>
+              <li>
+                Leveraged Node.js and AWS to create real-time, responsive user
+                interfaces and scalable backend systems.
+              </li>
+              <li>
+                Integrated Headless CMS such as Sanity to enable content
+                creators to easily manage the content of web apps.
+              </li>
+              <li>
+                Tech: React, Typescript, Prisma, NextJS, Framer, GSAP, GraphQL,
+                NX, Konva, Tailwind, Styled components, GSAP, Sanity
+              </li>
             </JobDetail>
           </div>
           <div>
@@ -79,10 +100,20 @@ export const RightColumn = (props: Props) => {
               2020
             </Job>
             <JobDetail>
-              Troubleshooting and improving processes where possible. Using
-              JavaScript, I created a chrome extension we used to add
-              functionalities to DoubleClick Campaign Manager as well as using
-              the Google API to create other tools and automate tasks
+              <li>
+                Troubleshot issues and improved processes to enhance workflow
+                efficiency.
+              </li>
+              <li>
+                Built a custom Chrome extension that added new features to
+                DoubleClick Campaign Manager and automated various tasks using
+                Google APIs.
+              </li>
+              <li>
+                Collaborated with internal teams to identify technical
+                requirements and develop customized solutions to meet business
+                needs
+              </li>
             </JobDetail>
           </div>
           <div>
