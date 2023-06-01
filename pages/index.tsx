@@ -7,7 +7,7 @@ import type {
 import Head from "next/head";
 import { useCallback, useEffect, useRef, useState } from "react";
 import styled, { keyframes } from "styled-components";
-import StartMenu from "../components/StartMenu";
+import { StartMenu } from "../components/StartMenu";
 import styles from "../styles/Home.module.css";
 import VolumeMute from "./assets/VolumeMute.svg";
 import VolumeUnMute from "./assets/VolumeUnMute.svg";
@@ -87,6 +87,25 @@ const Home = ({
       });
     }
   }, [navFromInternalPage, started]);
+
+  const handleKeyPress = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === "Enter") {
+        if (!started) {
+          setStarted(true);
+        }
+      }
+    },
+    [started]
+  );
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyPress);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [handleKeyPress]);
 
   return (
     <div className={styles.container}>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 
@@ -51,9 +52,16 @@ type Props = {
   handleLinkHover: () => void;
 };
 
-const items = ["About me", "Anime Site", "Experiments"];
-const StartMenu = ({ handleLinkHover, className }: Props) => {
-  const [activeItem, setActiveItem] = useState("");
+const items = {
+  ["About me"]: "/about",
+  ["Anime Site"]: "https://anime-site-hakeem.vercel.app/",
+  ["Experiments"]: "/experiments",
+};
+const itemTitles = Object.keys(items);
+
+export const StartMenu = ({ handleLinkHover, className }: Props) => {
+  const [activeItem, setActiveItem] = useState(itemTitles[0]);
+  const router = useRouter();
 
   const handleActiveLink = useCallback(
     (item: string) => {
@@ -67,33 +75,40 @@ const StartMenu = ({ handleLinkHover, className }: Props) => {
 
   const handleKeyPress = useCallback(
     (event: KeyboardEvent) => {
-      const currentActiveItem = items.indexOf(activeItem);
+      const currentActiveItem = itemTitles.indexOf(activeItem);
 
       if (event.key === "ArrowDown") {
         if (!activeItem) {
-          handleActiveLink(items[0])();
+          handleActiveLink(itemTitles[0])();
         }
 
-        if (currentActiveItem === items.length - 1) {
-          handleActiveLink(items[0])();
+        if (currentActiveItem === itemTitles.length - 1) {
+          handleActiveLink(itemTitles[0])();
         } else {
-          handleActiveLink(items[currentActiveItem + 1])();
+          handleActiveLink(itemTitles[currentActiveItem + 1])();
         }
       }
 
       if (event.key === "ArrowUp") {
         if (!activeItem) {
-          handleActiveLink(items[items.length - 1])();
+          handleActiveLink(itemTitles[itemTitles.length - 1])();
         }
 
         if (currentActiveItem === 0) {
-          handleActiveLink(items[items.length - 1])();
+          handleActiveLink(itemTitles[itemTitles.length - 1])();
         } else {
-          handleActiveLink(items[currentActiveItem - 1])();
+          handleActiveLink(itemTitles[currentActiveItem - 1])();
+        }
+      }
+
+      if (event.key === "Enter") {
+        if (activeItem) {
+          router.push(items[activeItem as keyof typeof items]);
+        } else {
         }
       }
     },
-    [activeItem, handleActiveLink]
+    [activeItem, handleActiveLink, router]
   );
 
   useEffect(() => {
@@ -108,7 +123,7 @@ const StartMenu = ({ handleLinkHover, className }: Props) => {
     <nav className={className}>
       <StyledUL>
         <li>
-          <Link href="/about" passHref>
+          <Link href={items["About me"]} passHref>
             <StyledLink
               active={activeItem === "About me"}
               onMouseEnter={handleActiveLink("About me")}
@@ -118,11 +133,7 @@ const StartMenu = ({ handleLinkHover, className }: Props) => {
           </Link>
         </li>
         <li>
-          <Link
-            style={{ color: "white" }}
-            href="https://anime-site-hakeem.vercel.app/"
-            passHref
-          >
+          <Link style={{ color: "white" }} href={items["Anime Site"]} passHref>
             <StyledLink
               active={activeItem === "Anime Site"}
               onMouseEnter={handleActiveLink("Anime Site")}
@@ -133,7 +144,7 @@ const StartMenu = ({ handleLinkHover, className }: Props) => {
           </Link>
         </li>
         <li>
-          <Link style={{ color: "white" }} href="/experiments" passHref>
+          <Link style={{ color: "white" }} href={items["Experiments"]} passHref>
             <StyledLink
               active={activeItem === "Experiments"}
               onMouseEnter={handleActiveLink("Experiments")}
@@ -146,5 +157,3 @@ const StartMenu = ({ handleLinkHover, className }: Props) => {
     </nav>
   );
 };
-
-export default StartMenu;
