@@ -22,6 +22,7 @@ const flash = keyframes`
 const StartButton = styled.h2`
   cursor: pointer;
   animation: ${flash} 1s ease-in-out infinite;
+  font-family: PressStart2P-Regular;
 `;
 
 const VolumeContainer = styled.div`
@@ -50,6 +51,7 @@ const H1 = styled.h1`
   user-select: none;
   position: relative;
   color: white;
+  font-family: PressStart2P-Regular;
   &::after {
     content: "";
   }
@@ -73,6 +75,8 @@ const Home = ({
   const handleLinkHover = useCallback(() => {
     const audio = audioRef.current;
     if (!audio) return;
+    // load allows us to stop the current audio and start a new one
+    audio.load();
     audio.play();
   }, []);
 
@@ -90,7 +94,7 @@ const Home = ({
 
   const handleKeyPress = useCallback(
     (event: KeyboardEvent) => {
-      if (event.key === "Enter") {
+      if (event.key === "Enter" || event.key === " ") {
         if (!started) {
           setStarted(true);
         }
@@ -141,7 +145,7 @@ const Home = ({
 
         <GradientOverlay />
         <div style={{ position: "relative", padding: 20 }} ref={nameRef}>
-          <H1 className={styles.title}>Hakeem Ladejobi</H1>
+          <H1 className={styles.title}>HAKEEM LADEJOBI</H1>
         </div>
 
         {!navFromInternalPage && !started ? (

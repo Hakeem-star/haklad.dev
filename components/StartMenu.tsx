@@ -23,10 +23,11 @@ const StyledLink = styled.a<{
         inset: 0;
         // 50px = hand cursor width
         left: -60px;
-        top: 6px;
+        top: 20px;
         background: url("./FF7Cursor.webp") no-repeat;
         background-size: contain;
         width: 50px;
+        height: 30px;
       }
     `;
   }}
@@ -44,6 +45,9 @@ const StyledUL = styled.ul`
 
   li {
     display: flex;
+    font-family: Final_Fantasy_VII_Menu;
+    font-size: 30px;
+    /* height: 40px; */
   }
 `;
 
@@ -101,7 +105,7 @@ export const StartMenu = ({ handleLinkHover, className }: Props) => {
         }
       }
 
-      if (event.key === "Enter") {
+      if (event.key === "Enter" || event.key === " ") {
         if (activeItem) {
           router.push(items[activeItem as keyof typeof items]);
         } else {
