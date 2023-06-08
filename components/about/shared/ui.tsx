@@ -104,6 +104,8 @@ export const FancyBorderWrapper = styled.div.attrs({
 
 export const ColumnHeader = styled.div`
   padding: 10px;
+  font-family: Mason-Regular;
+  font-weight: bold;
   font-size: 18px;
 
   position: relative;

@@ -98,3 +98,7 @@ h6 {
   font-family: PressStart2P-Regular;
   src: url("../public/fonts/PressStart2P-Regular.ttf");
 }
+@font-face {
+  font-family: TheWitcher;
+  src: url("../public/fonts/TheWitcher.ttf");
+}

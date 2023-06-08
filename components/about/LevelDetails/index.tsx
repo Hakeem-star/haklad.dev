@@ -7,6 +7,7 @@ import { getAge, getDaysToNextBDay } from "./utils";
 const LevelDetails = styled.div`
   display: flex;
   align-items: center;
+  font-family: Mason-Regular;
 `;
 
 const BarProgress = styled.div`

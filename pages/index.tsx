@@ -23,6 +23,8 @@ const StartButton = styled.h2`
   cursor: pointer;
   animation: ${flash} 1s ease-in-out infinite;
   font-family: PressStart2P-Regular;
+  position: absolute;
+  transform: translate(0, 50px);
 `;
 
 const VolumeContainer = styled.div`
@@ -110,7 +112,7 @@ const Home = ({
       document.removeEventListener("keydown", handleKeyPress);
     };
   }, [handleKeyPress]);
-
+  const showStartButton = !navFromInternalPage && !started;
   return (
     <div className={styles.container}>
       <Head>
@@ -143,28 +145,34 @@ const Home = ({
           {muted ? <VolumeMute /> : <VolumeUnMute />}
         </VolumeContainer>
 
-        <GradientOverlay />
+        {/* <GradientOverlay /> */}
         <div style={{ position: "relative", padding: 20 }} ref={nameRef}>
           <H1 className={styles.title}>HAKEEM LADEJOBI</H1>
         </div>
 
-        {!navFromInternalPage && !started ? (
-          <StartButton
-            onClick={() => {
-              setStarted(true);
-            }}
-          >
-            START
-          </StartButton>
-        ) : (
-          <div
-            style={{
-              zIndex: 3,
-            }}
-          >
-            <StartMenu handleLinkHover={handleLinkHover} />
-          </div>
-        )}
+        <StartButton
+          onClick={() => {
+            setStarted(true);
+          }}
+          style={{
+            zIndex: 3,
+            display: !showStartButton ? "none" : "block",
+          }}
+        >
+          START
+        </StartButton>
+
+        <div
+          style={{
+            zIndex: 3,
+            visibility: showStartButton ? "hidden" : "visible",
+          }}
+        >
+          <StartMenu
+            enableListeners={!showStartButton}
+            handleLinkHover={handleLinkHover}
+          />
+        </div>
       </main>
     </div>
   );

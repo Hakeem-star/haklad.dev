@@ -7,6 +7,8 @@ import {
 import { encodeSVG } from "./util";
 
 export const SummaryContent = styled.p`
+  font-family: Mason-Regular;
+  font-weight: 100;
   border: 6px solid transparent;
   border-image: ${() =>
     // encoded svg - https://yoksel.github.io/url-encoder/

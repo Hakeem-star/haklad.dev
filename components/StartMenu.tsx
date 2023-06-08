@@ -54,6 +54,7 @@ const StyledUL = styled.ul`
 type Props = {
   className?: string;
   handleLinkHover: () => void;
+  enableListeners?: boolean;
 };
 
 const items = {
@@ -63,7 +64,11 @@ const items = {
 };
 const itemTitles = Object.keys(items);
 
-export const StartMenu = ({ handleLinkHover, className }: Props) => {
+export const StartMenu = ({
+  handleLinkHover,
+  className,
+  enableListeners,
+}: Props) => {
   const [activeItem, setActiveItem] = useState(itemTitles[0]);
   const router = useRouter();
 
@@ -79,13 +84,10 @@ export const StartMenu = ({ handleLinkHover, className }: Props) => {
 
   const handleKeyPress = useCallback(
     (event: KeyboardEvent) => {
+      if (!enableListeners) return;
       const currentActiveItem = itemTitles.indexOf(activeItem);
 
       if (event.key === "ArrowDown") {
-        if (!activeItem) {
-          handleActiveLink(itemTitles[0])();
-        }
-
         if (currentActiveItem === itemTitles.length - 1) {
           handleActiveLink(itemTitles[0])();
         } else {
@@ -112,7 +114,7 @@ export const StartMenu = ({ handleLinkHover, className }: Props) => {
         }
       }
     },
-    [activeItem, handleActiveLink, router]
+    [activeItem, handleActiveLink, router, enableListeners]
   );
 
   useEffect(() => {
@@ -129,7 +131,7 @@ export const StartMenu = ({ handleLinkHover, className }: Props) => {
         <li>
           <Link href={items["About me"]} passHref>
             <StyledLink
-              active={activeItem === "About me"}
+              active={activeItem === "About me" || activeItem === ""}
               onMouseEnter={handleActiveLink("About me")}
             >
               About me

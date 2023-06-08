@@ -65,6 +65,8 @@ const Name = styled.h2`
   align-self: flex-start;
   /* margin-top: 0.55rem; */
   cursor: pointer;
+  font-family: TheWitcher;
+  letter-spacing: 2px;
 `;
 
 const Wrapper = styled.div`

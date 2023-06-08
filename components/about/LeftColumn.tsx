@@ -12,6 +12,11 @@ import {
 import { skillData } from "./constants";
 import { ColumnWrapper } from "./shared";
 import { ColumnHeader, FancyBorderWrapper } from "./shared/ui";
+import styled from "styled-components";
+
+const DetailsText = styled.p`
+  font-family: Mason-Regular;
+`;
 
 type Props = {};
 
@@ -34,7 +39,7 @@ export const LeftColumn = (props: Props) => {
                     <DetailsItemWrapper key={idx}>
                       <DetailsItem>
                         <FadedBackground>
-                          <p>{item.text}</p>
+                          <DetailsText>{item.text}</DetailsText>
                         </FadedBackground>
                       </DetailsItem>
                     </DetailsItemWrapper>
